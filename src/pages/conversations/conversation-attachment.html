@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar class="otherly-main-header sub-page">
+        <ion-col col-12 class="otherly-top-nav">
+            <ion-col col-2>
+                <button ion-button (click)="GoBack()">
+                    <ion-icon name="arrow-back"></ion-icon>
+                </button>
+            </ion-col>
+
+            <ion-col col-8 class="search-bar">
+                <!-- <ion-searchbar [(ngModel)]="myInput"></ion-searchbar> -->
+                Create Conversation
+            </ion-col>
+            <ion-col col-2>
+                <button menuToggle end class="menu-otherly-home">
+                    <ion-icon name="menu"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-col>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- <button (click)="createPost()">Post</button> -->
+    <button ion-button (click)="replyConversation()">Post</button>
+    
+    <button ion-button color="danger" (click)="cancelPost()">Cancel</button>
+    
+    <div *ngIf="selectedImages !=null && selectedImages.length > 0">
+        You have selected {{selectedImages.length}} images</div>
+
+        <div *ngIf="filesToUpload !=null && filesToUpload.length > 0">
+            You have selected {{filesToUpload.length}} images</div>
+    <br>
+    <div> {{self_postcode}}</div>
+    <input type="file" accept="image/*" #fileInput style="display:none; height: 0px" 
+    multiple="multiple" name="files[]" (change)="processWebImage($event)"
+    />
+    <br>
+
+
+    <ion-row class="post">
+
+        <ion-col col-12 class="post-text">
+            <ion-textarea class="post-text-input" id="chatbox" #chatbox [(ngModel)]="reply" (keyup)="onChange($event.keyCode)" (keydown)="resize()"
+                placeholder="Reply Message..."></ion-textarea>
+        </ion-col>
+
+
+
+        <ion-col col-12 class="post-buttom">
+            <ion-icon col-2 ios="ios-attach" md="md-attach" (click)="openMedia()"></ion-icon>
+
+            <!-- <button col-2 (click)="createPost()" float-right>
+                <img [style.background-color]="send_color" class="send" />
+            </button> -->
+        </ion-col>
+    </ion-row>
+
+
+
+</ion-content>

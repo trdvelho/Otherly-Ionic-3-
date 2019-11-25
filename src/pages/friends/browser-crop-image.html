@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+        <!-- <ion-title>
+            GO OUT
+        </ion-title> -->
+        <!-- <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+
+                <button class="button button-icon icon ion-ios-close-outline" ng-click="closeModal()"></button>
+
+                <span ion-text color="primary" showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons> -->
+        <ion-icon ios="ios-close" md="md-close"></ion-icon>
+
+
+        <!-- <img [src]="croppedImage"  /> -->
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="scroll-container">
+    <div class="scroll">
+
+        <input type="file" (change)="fileChangeEvent($event)" />
+        
+        <img [src]="croppedImage" width="191" height="146" data-toggle="modal" 
+        data-target="#selectedImageModal" (click)=setSelectedImage(croppedImage)/>
+
+        <image-cropper [imageChangedEvent]="imageChangedEvent" 
+        [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="256"
+            format="png" (imageCropped)="imageCropped($event)"></image-cropper>
+    </div>
+
+</ion-content>
+
+
+
+
+<!-- <ion-modal-view>
+    <ion-header-bar>
+        <button class="button button-icon icon ion-ios-close-outline" 
+                ng-click="closeModal()"></button>
+      <h1 class="title">My Modal title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-modal-view> -->

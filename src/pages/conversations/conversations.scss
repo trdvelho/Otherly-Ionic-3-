@@ -1,0 +1,160 @@
+.alert-head {
+	background-color: #D4DCE6 !important;
+}
+.alert-button-group{
+	background-color:white !important;	
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px
+}
+.alert-md .alert-button {
+	width:46%;
+	.button-inner{
+		-webkit-justify-content:center;
+		justify-content: center;
+	}
+}
+
+page-conversations {
+	.conversation-time{
+		// color: grey;
+    // float: right;
+    // margin-left: 121px;
+		// zoom: 75%;
+		position: absolute;
+		right: 5px;
+		position: absolute;
+    right: 5px;
+    height: 2.1%;
+    width: 27.73%;
+    color: #D4DCE6;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: right;
+	}
+//  Next Button 
+	.next {
+		background-color: white;
+		padding: 5px 5px;
+	
+		&.item-md.item-block, &.item-ios.item-block {
+			padding-right:0;
+			.item-inner {
+				border-bottom: none;
+				padding-right: 30px;
+			}
+		}
+
+		&.item-ios [item-right], &.item-md [item-right] {
+			margin-right: 0 !important;
+		}
+
+		button{
+			// background: linear-gradient(to bottom right, #00A0DF, #97CAEB);
+			background: linear-gradient(160.03deg, #00A0DF 0%, #97CAEB 100%);
+			color: white;
+			padding: 10px 10px;
+			font-size: 13px;
+			border-radius: 7px;
+		}
+	}
+	ion-item.item-md, ion-item.item-ios {
+		padding-left: 0px;	
+	}
+	.conversation-delete{
+		text-transform: capitalize;
+		font-size: 13px;
+		text-align: center;
+
+	}
+
+	.conversation-text {
+		white-space: pre-line;
+    width: 100%;
+		word-wrap: break-word;
+		overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		color: #000000;	
+		font-size: 13px;	
+	}
+	.infos-img{
+		width: 50px;
+    height: 50px;
+    border-radius: 50%;
+	}
+    .item-input{
+		padding-left: 0 !important;
+	.item-inner {
+		padding-right: 0 !important;
+		ion-input {
+			background-color: #f6f6f6;
+			padding: 0;
+			}
+		}
+	}
+
+	.ion-list{
+		background-color:white;
+	}	
+		
+	.list-md, .list-ios {
+		.item-block .item-inner{
+			border-bottom: none !important;
+		}
+	}
+	ion-item-sliding {
+		//border-bottom: 2px solid silver;
+	}
+
+	.talks_intros{
+		color: #00A0DF;
+		font-size: 18px;
+		font-weight: 200;
+		border-bottom: 1px solid #00A0DF;
+		margin: 0px 30px !important;
+		margin-bottom: 2px !important;
+		
+	}
+
+
+
+	.talks{
+		margin-top:40px;
+		margin-left:10px;
+		color: #00A0DF;
+		font-size: 18px;
+	}
+	.label-md, .label-ios{
+		margin:2px 0px 2px 0px;
+	}
+
+	.toolbar-background-md, .toolbar-background-ios{
+		background-color: #488aff;
+	}
+	.toolbar-title-md, .toolbar-title-ios{
+		color:#fff;
+	}
+
+	.post-title{
+		color: #00A0DF;
+		font-size:14px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-weight: bolder;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		width:75%;
+	}
+	.conversation-list{
+		padding: 0 30px;
+    }
+	.conversation-item {
+		padding-left: 0 !important;
+		border-bottom: 1px solid lightblue;
+		.conversation-photo {
+			padding-left: 0 !important;
+		}
+	}
+}

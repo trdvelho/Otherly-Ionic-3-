@@ -1,1 +1,7 @@
-# Otherly-Ionic-3-
+Otherly Ionic APP
+
+For installing:
+
+->Git clone the repo.
+->npm install -s
+->ionic serve -l

@@ -1,0 +1,45 @@
+more-popover {
+
+	.list-md, .list-ios {
+		margin: -1px 0 0;
+		.item-inner {
+			margin-right: 16px;
+		}
+	}
+	ion-label{
+		display: flex;
+	    align-items: center;
+	    &.label-md, &.label-ios {
+	    	margin: 3px 0;
+
+	    }
+	    img {
+	    	width: 25px;
+			height: 40px;
+			background-repeat: no-repeat;
+			text-align: center;
+			
+			margin-right: 5px;
+	    }
+		.favorite {
+			background-image: url("../assets/img/Heart_thanks.png");
+			-webkit-mask: url('../assets/img/Heart_thanks.svg') no-repeat 50% 50%;
+			background-color: #000000;
+			
+		}
+
+		.watch {
+			background-image: url("../assets/img/watch.png");
+			-webkit-mask: url('../assets/img/watch.svg') no-repeat 50% 50%;
+			background-color: #000000;
+
+		}
+
+		.flag {
+			background-image: url("../assets/img/flag.png");
+			-webkit-mask: url('../assets/img/flag.svg') no-repeat 50% 50%;
+			background-color: #000000;
+
+		}
+	}
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="75px" height="75px" viewBox="0 0 75 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>profile_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="profile_icon" fill-rule="nonzero">
+            <g>
+                <path d="M74.9996085,37.5001958 C74.9996085,58.2107658 58.2103742,75 37.4998042,75 C16.7892342,75 2.53631333e-15,58.2107658 0,37.5001958 C-2.53631333e-15,16.7896258 16.7892342,0.000391513735 37.4998042,0.000391513735 C47.4592744,-0.0451903025 57.0240031,3.89103157 64.0664858,10.9335142 C71.1089684,17.9759969 75.0451903,27.5407256 74.9996085,37.5001958 Z" id="Shape" fill="#97CAEB"></path>
+                <path d="M66,61.8226006 C58.8671906,70.1866726 48.4569551,75 37.5,75 C26.5430449,75 16.1328094,70.1866726 9,61.8226006 C14.3511223,50.9098437 25.4006067,44 37.5,44 C49.5993933,44 60.6488777,50.9098437 66,61.8226006 Z" id="Shape" fill="#00A0DF"></path>
+                <circle id="Oval" fill="#00A0DF" cx="37.5" cy="29.5" r="12.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

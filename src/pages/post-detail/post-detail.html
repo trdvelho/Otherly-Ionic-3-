@@ -1,0 +1,160 @@
+<ion-header #comment_area>
+  <ion-toolbar class="otherly-main-header">
+    <ion-col col-12 class="otherly-top-nav">
+      <ion-col col-2>
+        <button ion-button (click)="GoBack()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-8 class="search-bar">
+        <ion-searchbar [(ngModel)]="myInput"></ion-searchbar>
+      </ion-col>
+      <ion-col col-2>
+        <button menuToggle end class="menu-otherly-home">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-col>
+  </ion-toolbar>
+
+  <ion-row class="post" *ngIf="PostInfos !== undefined">
+    <ion-col col-3 class="user-info">
+      <img *ngIf="PostInfos.creator.photo_url !== null " src="{{ PostInfos.creator.photo_url }}" />
+
+      <img *ngIf="PostInfos.creator.photo_url == null " src="assets/img/avatar_small.svg" />
+    </ion-col>
+    <ion-col col-8>
+      <ion-card-header class="card-header" text-wrap>
+        {{PostInfos.creator.full_name}}
+      </ion-card-header>
+      <ion-card-header class="card-header-username" text-wrap>
+        @{{PostInfos.creator.username}}
+      </ion-card-header>
+      <ion-card-header class="card-header-created" text-wrap>
+        {{PostInfos.created}}
+      </ion-card-header>
+    </ion-col>
+    <ion-col col-1 (click)="FlagPost(detail)">
+      <ion-icon class="more"></ion-icon>
+    </ion-col>
+
+    <ion-col col-12>
+      <ion-card-header class="card-header-subject" text-wrap>
+        {{PostInfos.subject}}
+      </ion-card-header>
+      <ion-card-content [style.-webkit-line-clamp]='PostInfos.ellipsis' class="card-header-text" text-wrap>
+        {{PostInfos.text}}
+      </ion-card-content>
+
+      <button class="read_more_btn" *ngIf="PostInfos.text.length > 120" (click)="ReadMore()">{{PostInfos.read_more_text}}</button>
+    </ion-col>
+    <ion-row class="card-buttons">
+
+      <!-- <button (click)="ReplyPrompt(PostInfos)" ion-button icon-left clear small>
+          <ion-icon class="thanks"></ion-icon>
+        </button> -->
+
+      <button (click)="SharePrompt(PostInfos)" ion-button icon-left clear small>
+        <ion-icon class="share"></ion-icon>
+      </button>
+
+      <button ion-button icon-center clear small (click)="OpenPost(PostInfos)">
+        <img class="comment" [style.background-color]="comment_color" />
+      </button>
+
+      <button ion-button clear float-right (click)="StartIntro(PostInfos)">
+        <ion-icon class="introduction"></ion-icon>
+      </button>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col col-2 class="user-info reply-area">
+        <img *ngIf="UserData.photo_url !== null " src="{{ UserData.photo_url }}" />
+
+        <img *ngIf="UserData.photo_url == null " src="assets/img/avatar_small.svg" />
+      </ion-col>
+      <ion-col col-10 class="user-info-reply">
+        <ion-card-header class="card-header" text-wrap>
+          {{UserData.first_name}} {{UserData.last_name}}
+        </ion-card-header>
+        <ion-card-header class="card-header-username" text-wrap>
+          @{{UserData.user_name}}
+        </ion-card-header>
+      </ion-col>
+      <ion-col col-12 class="reply-area-text">
+        <ion-row class="post_reply">
+          <ion-col col-10>
+            <ion-textarea id="chatbox" #chatbox [(ngModel)]="post_reply" (keyup)="onChange($event.keyCode)" (keydown)="resize()" placeholder="Comment..."></ion-textarea>
+          </ion-col>
+           
+
+          
+          <ion-col col-2>
+            <button ion-button clear small>
+              <img [style.background-color]="send_color" class="send" (click)="ReplyPost()" />
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+  </ion-row>
+
+</ion-header>
+
+
+<ion-content ipadding create-comment-area [create-comment]="comment_area" id="content" has-footer="true" has-tabs="true">
+  <!--  -->
+  <ion-item class="spinner" *ngIf="!Details">
+    <ion-spinner></ion-spinner>
+  </ion-item>
+
+  <ion-list class="replies" *ngIf="Details">
+
+    <!-- LOOP WITH THE REPLIES LIST -->
+
+    <ion-item *ngFor="let detail of Details" class="detail-item">
+
+      <ion-row>
+        <ion-col class="user-info" col-2>
+          <img *ngIf="detail.Reply.creator.photo_url == null " src="assets/img/avatar_small.svg" />
+          <img *ngIf="detail.Reply.creator.photo_url !== null " src='{{detail.Reply.creator.photo_url}}' />
+        </ion-col>
+
+        <ion-col col-8>
+          <ion-card-header class="card-header-fullname" text-wrap>
+            {{detail.Reply.creator.first_name}} {{detail.Reply.creator.last_name}}
+          </ion-card-header>
+          <ion-card-header class="card-header-username" text-wrap>
+            {{detail.Reply.creator.username}}
+          </ion-card-header>
+          <ion-card-header class="card-header-created" text-wrap>
+            {{detail.Reply.created}}
+          </ion-card-header>
+        </ion-col>
+
+        <ion-col col-12>
+          <ion-card-content class="card-header-text" text-wrap>
+            {{detail.Reply.text}}
+          </ion-card-content>
+        </ion-col>
+
+        <ion-grid col-12 float-right class="votes">
+          <ion-row align-items-end class="votes">
+            <button class="ion-col-helps" col-2>
+              <ion-icon [style.color]='detail.vote_up' class="icon-thanks" (click)="Vote('up', detail.Reply.id)" name="arrow-round-up"></ion-icon>
+            </button>
+
+            <ion-col col-3 class="helps_given_text">{{detail.Reply.vote_score}}</ion-col>
+            <button class="ion-col-helps" col-2>
+              <ion-icon [style.color]='detail.vote_down' class="icon-thanks" (click)="Vote('down', detail.Reply.id)" name="arrow-round-down"></ion-icon>
+            </button>
+          </ion-row>
+        </ion-grid>
+
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <!-- END OF LOOP -->
+</ion-content>

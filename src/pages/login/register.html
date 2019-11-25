@@ -1,0 +1,63 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mobile Sign up</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+
+  <ion-row>
+    <ion-col col-6>
+        <button ion-button>Signup</button>
+
+    </ion-col>
+    <ion-col col-6>
+        <button ion-button color="light" (click)="signIn()">Sign In</button>
+    </ion-col >
+  </ion-row>
+
+  <!-- <ion-list>
+
+    <ion-button></ion-button>
+  </ion-list> -->
+  <form #f="ngForm" (ngSubmit)="verifyMobile()">
+    <ion-item>
+      <ion-label color="primary"  floating>  First Name</ion-label>
+      <ion-input type="text" name="name"   [(ngModel)]="mobile.first_name" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary"  floating>  Last Name</ion-label>
+        <ion-input name="name"  [(ngModel)]="mobile.last_name" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Country</ion-label>
+        <ion-select name="country" [(ngModel)]="mobile.country" required>
+          <ion-option value="1">US / Canada</ion-option>
+          <ion-option value="44">UK</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary"  floating>  Phone</ion-label>
+        <ion-input type="tel" name="tel"  [(ngModel)]="mobile.phone" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary"  floating>  Password</ion-label>
+        <ion-input  type="password" name="password"  [(ngModel)]="mobile.password" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary"  floating>  Verify Password</ion-label>
+        <ion-input  type="password" name="verrify_password"  [(ngModel)]="mobile.verify_password" required></ion-input>
+    </ion-item>
+    <ion-item>
+      
+      <button ion-button type="submit" [disabled]="!f.valid" block>Submit me</button>
+    </ion-item>
+    </form>
+</ion-content>

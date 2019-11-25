@@ -1,0 +1,137 @@
+<ion-header #post_area>
+  <ion-toolbar class="otherly-main-header">
+    <ion-col col-12 class="otherly-top-nav">
+      <ion-col col-2>
+        <img class="logo" src="assets/img/Otherly_logo_nav.svg" />
+      </ion-col>
+      <ion-col col-8 class="search-bar">
+        <ion-searchbar [(ngModel)]="myInput">
+
+        </ion-searchbar>
+      </ion-col>
+      <ion-col col-2>
+        <button menuToggle end class="menu-otherly-home">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-col>
+  </ion-toolbar>
+
+  <ion-row class="post">
+    <ion-col class="user-info" (click)="UserProfile()">
+      <img *ngIf="UserData.photo_url !== null " src="{{ UserData.photo_url }}" />
+      <img *ngIf="UserData.photo_url == null" src="assets/img/avatar_small.svg" />
+    </ion-col>
+
+    <ion-col col-8 class="infos_and_text">
+      <ion-col col-12 class="user-infos">{{UserData.first_name}} {{UserData.last_name}}</ion-col>
+      <ion-row col-12 class="user-infos">@{{UserData.username}}</ion-row>
+
+      <ion-col col-12 class="post-text">
+        <ion-textarea class="post-text-input" id="chatbox" #chatbox [(ngModel)]="post_text" (keyup)="onChange($event.keyCode)" (keydown)="resize()"
+          placeholder="Ask for or offer something..."></ion-textarea>
+      </ion-col>
+
+      <input type="file" accept="image/*" #fileInput style="display:none; height: 0px" multiple="multiple" name="files[]"
+       (change)="processWebImage($event)"
+      />
+    </ion-col>
+
+
+
+    <!-- Advanced: explicity set the icon for each platform -->
+    <!-- <ion-icon col-1 ios="ios-image" md="md-image"></ion-icon>
+          <ion-icon col-1 ios="ios-camera" md="md-camera" (click)="ReplyPost()"></ion-icon> -->
+
+
+
+    <ion-col col-12 class="post-buttom">
+      <ion-icon col-2 ios="ios-attach" md="md-attach" (click)="openMedia()"></ion-icon>
+      <ion-col col-3 *ngIf="imageFile !== null">
+        <ion-chip #chip3 color="primary">
+          <ion-avatar >
+            <img [src]="imageFile.url">
+          </ion-avatar>
+          <ion-label text-wrap>{{imageFile.name}}</ion-label>
+          <button ion-button clear color="primary" (click)="cancelPost()">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-chip>
+      </ion-col>
+
+      <button col-2 (click)="createPost()" float-right>
+        <img [style.background-color]="send_color" class="send" />
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-header>
+
+
+
+
+<ion-content padding create-post-area [create-post]="post_area" id="content" [style.margin-top]="60">
+  <ion-item class="spinner" *ngIf="!Feeds">
+    <ion-spinner name="bubbles" crescent></ion-spinner>
+  </ion-item>
+
+  <ion-list class="ion-cards">
+    <ion-item-sliding *ngFor="let feed of Feeds">
+      <ion-item>
+        <ion-row>
+          <ion-col class="user-picture" col-3>
+            <img *ngIf="feed.creator.photo_url == null " src="assets/img/avatar_small.svg" />
+            <img class="avatar" *ngIf="feed.creator.photo_url !== null " src='{{feed.creator.photo_url}}' />
+          </ion-col>
+          <ion-col col-8>
+            <ion-card-header class="card-header" text-wrap>
+              {{feed.creator.full_name}}
+            </ion-card-header>
+            <ion-card-header class="card-header-username" text-wrap>
+              @{{feed.creator.username}}
+            </ion-card-header>
+            <ion-card-header class="card-header-date" text-wrap>
+              {{feed.created}}
+            </ion-card-header>
+          </ion-col>
+          <ion-col col-1 (click)="FlagPost($event, feed)" class="more_col">
+            <ion-icon class="more" [style.color]="feed.font_style"></ion-icon>
+          </ion-col>
+          <ion-col col-12 class="subject_text">
+            <ion-card-header class="card-header-black" text-wrap>
+              {{feed.subject}}
+            </ion-card-header>
+            <ion-card-content class="card-header-black" [style.-webkit-line-clamp]='feed.ellipsis' text-wrap>
+              {{feed.text}}
+            </ion-card-content>
+            <button class="read_more_btn" *ngIf="feed.text.length > 120" (click)="ReadMore(feed.code)">{{feed.read_more_text}}</button>
+          </ion-col>
+        </ion-row>
+        <ion-row class="card-buttons">
+
+          <!--  <button (click)="ReplyPrompt(feed)" ion-button clear small>
+            <img class="thanks"  [style.background-color]="Thanks_color()" />
+            <div *ngIf="feed.thanks_count >0">{{feed.thanks_count}}</div>
+          </button>
+          -->
+
+          <button (click)="SharePrompt($event,feed)" ion-button clear small>
+            <img class="share" />
+          </button>
+          <button ion-button clear small data-badge="5" (click)="OpenPost(feed)">
+            <img class="comment" />
+            <ion-badge *ngIf="feed.reply_count >0">1</ion-badge>
+          </button>
+          <button ion-button clear small (click)="StartIntro(feed)">
+            <img class="introduction" />
+          </button>
+
+        </ion-row>
+      </ion-item>
+      <ion-item-options side="right" class="sliding-button">
+        <button ion-button expandable color="lightgray" (click)="PassPost(feed.code)">
+          <img class="pass" /> Pass
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

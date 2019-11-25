@@ -1,0 +1,199 @@
+<ion-header>
+
+  <ion-toolbar class="otherly-main-header sub-page">
+    <ion-col col-12 class="otherly-top-nav">
+      <ion-col col-2>
+
+        <button ion-button (click)="GoBack()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+
+        <ion-col col-7 class="talk-avatar">
+          <img class="chat-title-avatar" src="assets/img/avatar_small.svg" />
+        </ion-col>
+
+      </ion-col>
+
+
+      <ion-col class="avatar-talk-participants">
+
+
+
+        <ion-col col-8 *ngIf="!details">
+          <ion-spinner name="bubbles"></ion-spinner>
+        </ion-col>
+        <ion-col col-9 *ngIf="details">
+          <ion-note class="talk-participants">
+            <div class="conversation-title" (click)="openConversationParticipants(title,details)">{{ title }}
+            </div>
+            <!-- <div (click)="openConversationParticipants()" class="participants-list" *ngFor="let items of  details" >{{items.creator.first_name}} {{items.creator.last_name}} <span class="participant-listno" *ngIf="participantsno"> & {{participantsno}} other friends</span> -->
+            <div (click)="openConversationParticipants(title,details)" class="participants-list">You and
+              <span class="participant-listno" *ngIf="participantsno">{{participantsno}} friends</span>
+            </div>
+          </ion-note>
+        </ion-col>
+
+
+      </ion-col>
+
+
+      <ion-col col-2>
+        <button menuToggle end class="menu-otherly-home">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-col>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!-- START this.code === 'oly' -->
+  <!-- <ion-item class="spinner" *ngIf="onLoadMoreClick">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </ion-item> -->
+  <div *ngIf="code == 'oly' && next !== null " (click)="OlyConversationDetails(true)">
+    <p> load more data</p>
+  </div>
+  <ion-list *ngIf="code == 'oly'">
+    <ion-item class="chat-item" *ngFor="let reply of replies" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <div *ngIf="reply.changed_date != undefined">
+        <p> {{reply.changed_date}}</p>
+      </div>
+      <ion-col col-2 *ngIf="reply.user != undefined && (reply.user.photo_url !=undefined ||reply.user.photo_url != null)" (click)="ShowProfile(reply.user)">
+        <img class="chat-avatar-left" src="{{reply.user.photo_url}}" />
+      </ion-col>
+
+      <!-- temp code -->
+      <div> </div>
+      <!-- temp code -->
+
+      <div *ngIf="reply.user != undefined && reply.user.username !== 'test_lyrylhb_three'" class="talk-bubble other round tri-right left-top">
+        <div class="talktext">
+          <p>
+            <span class="other-heading">{{reply.user.first_name}} {{reply.user.last_name}}</span>
+            <br/> {{ reply.text }}</p>
+          <span class="message-bubble participant-time">{{reply.time_created}} </span>
+        </div>
+      </div>
+
+      <div *ngIf="reply.user != undefined && reply.user.username == 'test_lyrylhb_three'" style="width:215px;" class="talk-bubble self round tri-right right-top">
+        <div class="talktext">
+          <p>
+            {{ reply.text }}
+            <span class="message-bubble self-time">{{reply.user.time_created}} </span>
+          </p>
+        </div>
+      </div>
+
+      <ion-col col-2 class="chat-self-icon" *ngIf="reply.user != undefined && reply.user.username == 'test_lyrylhb_three'" (click)="ShowProfile(reply.user)">
+        <img class="chat-avatar chat-avatar-right" src="assets/img/avatar_small.svg" />
+      </ion-col>
+
+    </ion-item>
+  </ion-list>
+  <!-- END  this.code === 'oly'-->
+
+  <div *ngIf="code !== 'oly' && next !== null " (click)="GetConversationReplyList(true)">
+    <p> load more data</p>
+  </div>
+  <ion-list *ngIf="code !== 'oly'">
+    <ion-item class="chat-item" *ngFor="let reply of replies" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <div *ngIf="reply.changed_date != undefined">
+        <p> {{reply.changed_date}}</p>
+      </div>
+
+      <ion-col col-2 *ngIf="reply.participant != undefined && (reply.participant.user.photo_url !=undefined ||reply.participant.user.photo_url != null)"
+        (click)="ShowProfile(reply.participant.user)">
+        <img class="chat-avatar-left" src="{{reply.participant.user.photo_url}}" />
+      </ion-col>
+
+      <div> </div>
+
+      <div *ngIf="reply.participant != undefined && reply.participant.user.username !== 'test_lyrylhb_three'" class="talk-bubble other round tri-right left-top">
+        <div class="talktext">
+          <p>
+            <span class="other-heading">{{reply.participant.user.first_name}} {{reply.participant.user.last_name}}</span>
+            <br/> {{ reply.text }}</p>
+          <span class="message-bubble participant-time">{{reply.time_created}} </span>
+        </div>
+      </div>
+
+      <!-- START Display image section -->
+      <ion-col col-2 *ngIf="reply.participant != undefined && (reply.participant.user.photo_url !=undefined ||reply.participant.user.photo_url != null)"
+        (click)="ShowProfile(reply.participant.user)">
+        <img class="chat-avatar-left" src="{{reply.participant.user.photo_url}}" />
+      </ion-col>
+
+      <div> </div>
+
+      <div *ngIf="reply.attachments != undefined ">
+        <div class="image-attachment" *ngFor="let attachment of reply.attachments">
+
+          <img src="{{attachment.attachment.image}}"/>
+          <!-- <img src="https://front-end-dev-bucket.s3.amazonaws.com/media/attachments/images/1493016169050.jpg"/> -->
+        </div>
+      </div>
+
+      <!-- END Display image section -->
+
+
+      <div *ngIf="reply.participant != undefined && reply.participant.user.username == 'test_lyrylhb_three'" style="width:215px;"
+        class="talk-bubble self round tri-right right-top">
+        <div class="talktext">
+          <p>
+            {{ reply.text }}
+            <span class="message-bubble self-time">{{reply.participant.user.time_created}} </span>
+          </p>
+        </div>
+      </div>
+
+      <ion-col col-2 class="chat-self-icon" *ngIf="reply.participant != undefined && reply.participant.user.username == 'test_lyrylhb_three'"
+        (click)="ShowProfile(reply.participant.user)">
+        <img class="chat-avatar chat-avatar-right" src="assets/img/avatar_small.svg" />
+      </ion-col>
+
+    </ion-item>
+
+  </ion-list>
+
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+  <div class="chat-gap">
+  </div>
+  <div class="chat-panel" (ionBlur)="hideSendButton()">
+
+    <ion-row>
+      <input type="file" accept="image/*" #fileInput style="display:none; height: 0px" multiple="multiple" name="files[]" (change)="processWebImage($event)"
+      />
+
+      <ion-col col-12 class="post-buttom">
+        <ion-icon col-1 ios="ios-attach" md="md-attach" (click)="openMedia()"></ion-icon>
+        <ion-col col-3 *ngIf="imageFile !== null">
+          <ion-chip #chip3 color="primary">
+            <ion-avatar>
+              <img [src]="imageFile.url">
+            </ion-avatar>
+            <ion-label text-wrap>{{imageFile.name}}</ion-label>
+            <button ion-button clear color="dark" (click)="cancelConversation()">
+              <ion-icon name="close-circle"></ion-icon>
+            </button>
+          </ion-chip>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+    <br>
+
+    <ion-textarea class="chatbox" id="chatbox" (ionFocus)="showSendButton()" #chatbox [(ngModel)]="reply" (keydown)="resize()"
+      placeholder="Reply Message"></ion-textarea>
+    <div>
+      <img *ngIf="showButton" class="send-button" (click)="replyConversation()" />
+    </div>
+
+  </div>
+</ion-content>

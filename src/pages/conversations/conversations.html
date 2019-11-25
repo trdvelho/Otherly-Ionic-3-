@@ -1,0 +1,107 @@
+<ion-header>
+
+  <ion-toolbar class="otherly-main-header sub-page">
+    <ion-col col-12 class="otherly-top-nav">
+      <ion-col col-2>
+        <img class="logo" src="assets/img/Otherly_logo_nav.svg"/>
+      </ion-col>
+      <ion-col col-8 class="search-bar">
+        <ion-searchbar [(ngModel)]="myInput">
+
+        </ion-searchbar>
+      </ion-col>
+      <ion-col col-2>
+        <button menuToggle end class="menu-otherly-home"><ion-icon name="menu"></ion-icon></button>
+      </ion-col>
+    </ion-col>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+
+ <ion-item class="next">
+    <button item-right (click)="new_talk()">+ NEW TALK</button>
+  </ion-item>
+  
+  <ion-label class="talks_intros">
+    Talks & Intros
+  </ion-label>
+ 
+  <ion-item class="spinner" *ngIf="!Conversations">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </ion-item>
+
+  <ion-list class="ion-list conversation-list" >
+
+        
+        <!-- <ion-item > -->
+
+
+          <ion-item-sliding #item class="slide-border" *ngFor="let list of Conversations | filterconversation: searchConversation" >
+              
+            <!--   OLY  -->
+
+            <ion-item class="conversation-item">
+                <ion-row >
+                  <ion-col col-3 (click)="ShowProfile(list.post)" class="conversation-photo" >
+               
+                      <img class="infos-img"  src="assets/img/avatar_small.svg" /> 
+                  </ion-col>
+
+                  <ion-col col-9 class="two_chars" (click)="showConversationDetails('oly','Talk with Oly',list.post.self.user)">
+                    <ion-row>
+                      <div class="post-title" >Talk with Oly <span class="conversation-time" >! ! </span>
+                    </div> 
+                    </ion-row>
+                    <!-- <ion-row> 
+                      <div class="conversation-text" *ngIf="list.post.last_converation !== null;else first_last_name" > {{list.post.last_conversation}}  </div>
+                      <ng-template #first_last_name> Oly .. </ng-template>
+                  
+                    </ion-row> -->
+                  </ion-col>
+                </ion-row>
+            </ion-item>
+
+
+
+            <!-- / OLY  -->
+            
+            
+            <ion-item class="conversation-item">
+                  <ion-row >
+                    <ion-col col-3 (click)="ShowProfile(list.post)" class="conversation-photo" >
+                
+                        <img class="infos-img" *ngIf="list.post.photo_url != null"  src="assets/img/avatar_small.svg" /> 
+                        <img class="infos-img" *ngIf="list.post.photo_url == null" src="assets/img/avatar_small.svg" /> 
+                    </ion-col>
+
+                    <ion-col col-9 class="two_chars" (click)="showConversationDetails(list.post.code, list.post.title)">
+                      <ion-row><div class="post-title" *ngIf="list.post.title; else show_name">{{list.post.title }} <span class="conversation-time" >{{list.post.conversation_created_now}}</span>
+                      </div> 
+                      <ng-template #show_name>{{list.post.first_name}} </ng-template></ion-row>
+                      <ion-row> 
+                        <div class="conversation-text" *ngIf="list.post.last_converation !== null;else first_last_name" > {{list.post.last_conversation}}  </div>
+                        <ng-template #first_last_name>{{list.post.first_name}} {{list.post.last_name}}</ng-template>
+                    
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+              </ion-item>
+
+              <ion-item-options>
+                <button class="conversation-delete" ion-button expandable (click)="deleteConversation(list.post.code, list.post.self.user)"><ion-icon name="trash" style="zoom:2.25; margin-top:0px"></ion-icon>delete</button>
+              </ion-item-options>
+          
+          </ion-item-sliding>
+
+        <!-- </ion-item> -->
+       
+  </ion-list>
+
+</ion-content>
+
+
+

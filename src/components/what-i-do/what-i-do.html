@@ -1,0 +1,86 @@
+<ion-list>
+	<ion-title>Add Professional Background</ion-title>
+  
+
+  <form #f="ngForm" (ngSubmit)="NewProfessionaBG()">
+    <ion-item>
+	    <ion-label floating>Professional title (required)</ion-label>
+	    <ion-input type="text" name="name" [(ngModel)]="profession.name" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Company or school (required)</ion-label>
+        <ion-input type="text" name="where" [(ngModel)]="profession.where" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Description (optional)</ion-label>
+        <ion-input type="text" name="description" [(ngModel)]="profession.description" ></ion-input>
+    </ion-item>
+    <ion-row>
+	    <ion-col col-4>
+	    	<ion-item>
+		 		<ion-label floating  text-wrap>Start year (required)</ion-label>
+		        <ion-datetime name="start_year" displayFormat="YYYY" [(ngModel)]="start_date" required></ion-datetime>
+	 		</ion-item>
+	     	
+	 	</ion-col>
+	 	<ion-col col-4>
+	 		<ion-item>
+		 		<ion-label floating text-wrap>Start month (required)</ion-label>
+		        <ion-datetime name="start_month" displayFormat="MMM" [(ngModel)]="start_date" required></ion-datetime>
+	 		</ion-item>
+	 	</ion-col>
+	 	<ion-col col-4>
+	 		<ion-item>
+		        <ion-label floating text-wrap>Start day (optional)</ion-label>
+		        <ion-datetime name="start_day" displayFormat="DD" [(ngModel)]="start_date"></ion-datetime>
+	     	</ion-item>
+	 	</ion-col>
+ 	</ion-row>
+
+ 	<ion-list name="end" radio-group [(ngModel)]="job_end_date">
+
+	  <ion-item>
+	    <ion-label >Current position</ion-label>
+	    <ion-radio value="current" [checked]="true"></ion-radio>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-label>Enter position end date</ion-label>
+	    <ion-radio value="end_date"></ion-radio>
+	  </ion-item>
+	</ion-list>
+
+	<ion-row *ngIf="job_end_date == 'end_date'">
+	    <ion-col col-4>
+	     	<ion-item>
+	     		<ion-label floating required text-wrap>End year (required)</ion-label>
+		        <ion-datetime name="end_year" displayFormat="YYYY" [(ngModel)]="end_date" required></ion-datetime>
+		       
+	     	</ion-item>
+	 	</ion-col>
+	 	<ion-col col-4>
+	 		<ion-item>
+		 		<ion-label floating required text-wrap>End month (required)</ion-label>
+		        <ion-datetime name="end_month" displayFormat="MMM" [(ngModel)]="end_date" required></ion-datetime>
+	 		</ion-item>
+	 	</ion-col>
+	 	<ion-col col-4>
+	 		<ion-item>
+		 		 <ion-label floating text-wrap>End day (optional)</ion-label>
+		        <ion-datetime name="end_day" displayFormat="DD" [(ngModel)]="end_date"></ion-datetime>
+	 		</ion-item>
+	 	</ion-col>
+ 	</ion-row>
+ 	
+    <ion-row >
+	  	<ion-col col-6 class="buttons_col">
+	    	<button ion-button block>CANCEL</button>
+	    </ion-col>
+	    <ion-col col-6 class="buttons_col">
+	    	<button ion-button type="submit" [disabled]="!f.valid" block>OK</button>
+	    </ion-col>
+        
+    </ion-row>
+
+    </form>
+</ion-list>

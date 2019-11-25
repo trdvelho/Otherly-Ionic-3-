@@ -1,0 +1,42 @@
+
+<input type="file" accept="image/*" #fileInput style="display:none; height: 0px" name="files[]" (change)="processWebImage($event)"
+/>
+<ion-list>
+
+    <!-- <ion-item *ngIf='isBrowser' (click)="OpenWith('browser')">
+        <ion-label [style.color]="friends_style">
+            <img class="avatar-friends" /> Upload Photo from Gallery</ion-label>
+    </ion-item> -->
+
+
+    <ion-item *ngIf='isCore' (click)="OpenDesktopGallery('desktop-gallery')">
+        <ion-label [style.color]="friends_style">
+            <img class="avatar-icon" /> Upload Photo from Gallery</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf='!isCore' (click)="OpenWith('gallery')">
+            <ion-label [style.color]="friends_style">
+                <img class="avatar-friends" /> Upload Photo from Gallery</ion-label>
+        </ion-item>
+
+    <ion-item *ngIf='!isCore' (click)="OpenWith('camera')">
+        <ion-label [style.color]="friends_style">
+            <img class="avatar-friends" /> Upload Photo from Camera</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf='!isCore' (click)="OpenWith('view-photo')">
+        <ion-label [style.color]="friends_style">
+            <img class="avatar-friends" /> View Photo</ion-label>
+    </ion-item>
+
+    <ion-item (click)="OpenWith('remove-photo')">
+        <ion-label [style.color]="friends_style">
+            <img class="avatar-friends" /> Remove Photo</ion-label>
+    </ion-item>
+
+    <ion-item>
+        <ion-label [style.color]="friends_style" (click)="cancelPopup()">
+            <img class="avatar-friends" /> Cancel</ion-label>
+    </ion-item>
+
+</ion-list>

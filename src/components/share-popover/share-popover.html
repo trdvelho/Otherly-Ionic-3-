@@ -1,0 +1,30 @@
+
+<ion-list >
+	
+	<ion-item>
+
+    	<ion-label [style.color]="import_style" [style.color]="import_style" (click)="ShareWith('me')">
+    		<img class="avatar-icon" /> Post to my page</ion-label>
+	</ion-item>
+
+	<ion-item  (click)="ShareWith('friends')">
+		<ion-label [style.color]="friends_style">
+			<img class="avatar-friends" /> Share with friends</ion-label>
+	</ion-item>
+
+	
+	<ion-item>
+    
+    	<ion-label [style.color]="community_style" (click)="ShareWith('community')">
+    	<img class="avatar_communities" />
+    	Share with communities</ion-label>
+ 
+	</ion-item>
+
+	<ion-item [style.color]="facebook_style" (click)="ShareWith('facebook')">
+		<ion-label><img class="facebook" /> Facebook</ion-label>
+	</ion-item>
+
+
+</ion-list>
+

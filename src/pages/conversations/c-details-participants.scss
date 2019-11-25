@@ -1,0 +1,163 @@
+page-c-details-participants {
+    $OtherlyBlue : #00A0DF;
+
+    .otherly-top-nav {
+        button {
+            margin: 0;
+            padding: 0 0.8em;
+        }
+    }
+
+    .off-notifications {
+        color:#D4DCE6;
+    }
+    .on-notifications{
+        color:$OtherlyBlue;
+    }
+    top:0px !important;
+	.show-back-button {
+		color:white;
+    }
+  
+	.toolbar-title{
+		display: block;
+        padding-top:10px;
+        padding-left:0px;
+	}
+	.conversation-title{
+		color:white;
+		position: relative;
+		margin-left: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        display: -webkit-inline-box;
+        -webkit-box-orient: vertical;
+		//top:-20px;
+	}
+	.toolbar-background{
+		background: $OtherlyBlue;
+		color:#fff;
+	}
+	.burger-icon{
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        color: white;
+    }
+    .conv-setting-img{
+        max-width: 100%;
+        border-radius: 50%; 
+        width: 35px;
+        height: 35px
+    }
+    .friend-list-settings{
+        color:$OtherlyBlue;
+        font-size:14px;
+        font-weight: bold;
+    }
+    
+    .edit-talk-name{
+        margin-left:10px;
+        font-size: 13px;
+    }
+    .edit-title{
+        font-size: 13px;
+    }
+    .edit-title-icon {
+        zoom:75%;
+    }
+    .setting-controls{
+        font-size:16px;
+    }
+    
+    .more-icon{
+        
+            color:'#292626a6';
+        }
+        .chat-title-avatar{
+            width: 35px;
+            height: 35px;
+        
+        }
+        
+        .back-button {
+            color:white;
+            display: block;
+            margin: 0 0px;
+            min-width: 30px;
+        }
+        .participants-list {   
+           
+            display: none;
+            color:lightblue;
+            font-size: 10px;
+            text-align: left;   
+        
+        }
+
+        .chat-setting-avatar{
+            margin: auto;
+            img {
+                width: 72px;
+            }
+        }
+        .chat-setting-icons {
+            margin-bottom:12px;
+            ion-icon{
+                margin-right:12px;
+            }
+        }
+
+        ion-item{
+            padding-left:0px !important;
+        }
+        .ion-col-remove {
+            text-align: center;
+            margin-top: 0px;     
+            color:#00A0DF;       
+
+            color:$OtherlyBlue;       
+
+        }
+    
+    .participant-list .label-md,.label-ios{
+        margin: 5px 5px 5px 0 !important;
+    } 
+    .list-ios, .list-md {
+        margin: 0px 0 0;
+    }
+    .remove-friend-icon{    
+    
+        background-image: url("../assets/icon/remove_friend.png");
+        -webkit-mask: url('../assets/icon/remove_friend.svg') no-repeat 50% 50%;
+        height: 22px;
+        width: 22px;    
+        background-color: $OtherlyBlue;
+    }
+    .num-of-members{
+        height: 4.2%;
+        width: 100%;
+        color: #009FDF;
+        font-size: 18px;	
+        line-height: 24px;
+        padding-bottom: 30px;
+        border-bottom: 1px $OtherlyBlue solid;
+        
+    }
+    .helps_given_text {
+        font-size: 13px;
+        color: $OtherlyBlue;
+    }
+    .remove-participant{
+        display:block;
+        margin-right:-10px;
+    }
+    .item-md.item-block .item-inner {
+        padding-right:0px !important;
+    }
+
+}

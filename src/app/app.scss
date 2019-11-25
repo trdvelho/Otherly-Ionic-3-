@@ -1,0 +1,226 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+
+
+.spinner{
+
+	.spinner-ios, .spinner-md {
+	    position: relative;
+		margin-top: 27%;
+		margin-bottom: 85%;
+	    width: 100%;
+	}
+	.item-inner {
+		border:none;
+	}
+
+}
+ion-spinner{
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+	
+
+//HEADER RULES ------------------------------------------
+.otherly-main-header {
+	padding-left: 8px;
+	padding-right: 8px;
+
+	&.toolbar-md, &.toolbar-ios {
+		
+		ion-col {
+			padding-right: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0;
+		}
+		position: fixed;
+		z-index: 2;
+		top:0;
+		box-shadow: 0px 5px 15px lightgrey;
+		&.sub-page {
+			position: relative;
+			top:auto;
+			display: flex;
+			z-index:0;
+    		-webkit-box-pack: center;
+		}
+
+		.toolbar-background {
+			background-color: #00A0DF;
+			
+		}
+
+		.logo {
+			width: 63px;
+			padding-right: 5px;
+		}
+	}
+
+
+}
+
+.otherly-top-nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+
+	button{
+		background-color: transparent;
+		height: auto;
+		width: 63px;
+		box-shadow: none;
+		font-size: 2rem;
+	}
+
+
+	.menu-otherly-home {
+		background-color: #00A0DF;
+		color: white;
+		font-size: 20px;
+
+		padding-right: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0;
+		ion-icon {
+			color: white;
+			font-size: 20px;
+		}
+	}
+}
+
+
+
+
+.search-bar {
+	padding: 0;
+	background-color: transparent;
+	.searchbar-md .searchbar-input, .searchbar-ios .searchbar-input {
+
+		color: white;
+		padding: 0px 10px 0px 25px;
+		background: #00A0DF !important;
+		height: 28px;
+		width: 100%;
+		border-radius: 19px;
+		box-shadow: none;
+		border: 1px solid white;
+		font-size: 13px;
+		&::placeholder{
+			color: white;
+			font-style: italic;
+			font-weight: 200;
+			font-size: 13px;
+		}
+	}
+	.searchbar-md .searchbar-search-icon, .searchbar-ios .searchbar-search-icon {
+		left: 8px;
+    	top: 8px;
+    	color: white;
+    	
+		
+	}
+}
+
+
+
+	
+
+//END OF HEADER RULES -----------------------------------
+
+ion-app.md [padding] {
+	padding: 0 16px;
+}
+
+.header-md{
+	&::after {
+		background-image: none !important;
+		background-color: transparent !important;
+	}
+}
+
+.alert-md .alert-wrapper {
+	border-radius: 15px;
+
+	.alert-head{
+		background-color: lightblue;
+	  	border-top-right-radius: 15px;
+    	border-top-left-radius: 15px;
+	}
+}
+
+.scroll-content::-webkit-scrollbar {
+		width: 1px;
+		height: 1px;
+}
+.scroll-content::-webkit-scrollbar-track-piece  {
+	background-color: transparent;
+
+}
+.scroll-content::-webkit-scrollbar-thumb:vertical {
+
+	background-color: transparent;
+
+}
+
+
+.post_created_ok {
+	.toast-message{
+		background: lightgreen;
+	}
+}
+
+.post_created_error {
+	.toast-message {
+		background: lightsalmon;
+	}
+}
+
+
+
+
+//font-family
+
+@font-face {
+  font-family: 'GillSans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/GillSans.ttc');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/Open_Sans/OpenSans-Regular.ttf');
+}
+
+* {
+	font-family: 'Open Sans';
+}
+
+

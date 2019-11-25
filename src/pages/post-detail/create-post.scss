@@ -1,0 +1,476 @@
+page-post-detail {
+
+	.spinner{
+
+	    position: relative;
+		margin-top: 18%;
+		margin-bottom: 55%;
+	    width: 100%;
+
+	}
+	ion-spinner{
+	    position: relative;
+	    display: inline-block;
+	    width: 64px;
+	    height: 64px;
+		margin-left: auto;
+		margin-top: 13%;
+		margin-right: auto;
+	}
+
+
+	ion-navbar.toolbar{
+		position: fixed;
+		top:0;
+		z-index: 5;
+	}
+	.icon-back{
+		font-family:"Roboto", "Helvetica Neue", sans-serif !important;
+	}
+	.toolbar-background {
+		background-color: #00A0DF;
+
+	}
+	.page-title {
+		padding-left: 19%;
+		.toolbar-title-md {
+			color: white;
+		}
+	}
+
+	.bar-button-default-md {
+		color: white !important;
+	}
+	.scroll-content {
+		background-color: white !important;
+	}
+
+
+	ion-content {
+		background-color: white;
+	}
+
+	.read_more_btn {
+		background-color: transparent;
+		color:#97CAEB;
+		float: right;
+		padding-right: 0;
+		padding-left: 0;
+	}
+
+
+
+	.post {
+		padding: 25px 30px 0px 30px;
+		box-shadow: 0px 4px 13px lightgrey;
+		background-color: white;
+		line-height: 1;
+		margin-top: 50px;
+		z-index: 1;
+		overflow-y: scrool;
+		position: relative;
+
+		.card-header-md, .card-header-ios {
+			padding: 0;
+			color: #00A0DF;
+			&.card-header {
+				padding-top: 3px;
+				font-size: 14px;
+	    		font-weight: bold
+			}
+			&.card-header-username{
+				font-size: 10px;	
+			}
+			&.card-header-created {
+				color:lightgray;
+				font-size: 10px;
+			}
+			&.card-header-subject{
+				font-weight: bold;
+			}
+			&.card-header-subject, .card-header-text{
+				color:black;
+				font-size: 13px;
+
+				width: 100%;
+				
+			}
+		}
+
+		.user-infos {
+			color: #00A0DF;
+			font-weight: 600;
+			font-size: 13px;
+		}
+
+
+		.user-info {
+			padding-bottom: 0;
+			width: 100%;
+			border-radius: 50px;
+			img {
+				width: 50px;
+				min-height: 1px;
+
+			}
+		}
+
+		.more
+
+		.post-comment, .replies {
+			background-color: white;
+			box-sizing: border-box;
+			border-top: 1px solid #D4DCE6;
+			width: 100%;
+
+			.user-info {
+				
+				border-radius: 50px;
+				img {
+					width: 50px;
+					min-height: 40px;
+				}
+			}
+			
+		}
+
+		textarea{
+			margin-top: 0px;
+			height: 30px;
+			//border-radius: 10px;
+			box-shadow: none;
+			//border: 1px solid lightgray;
+
+			
+			&::placeholder{
+				font-style: italic;
+				font-weight: 200;
+				font-size: 12px;
+				padding: 0px 0px;
+			}
+			
+		}
+		.text-input-md, .text-input-ios {
+			width: 100%;
+			margin: 0;
+			padding: 10px 15px !important;
+			height: 35px;
+		 }
+	
+
+		.reply-area {
+			padding-left: 0;
+			height: 60px;
+			img{
+				padding-top: 5px;
+				padding-top: 5px;
+			    position: relative;
+			    top: -5px;
+			    width: 40px !important;
+			    min-height: 1px;
+			    clip-path: circle(35% at center);
+			}
+			padding-top: 0;
+		}
+		.reply-area-text{
+			border:1px solid lightgray;
+			border-radius: 20px;
+			margin-bottom: 10px;
+			padding: 0;
+
+
+			ion-col, button{
+				margin:0;
+				padding:0;
+			}
+			button{
+				background-color: transparent;
+				
+			}
+			.send {
+				float: right;
+				background-image: url("../assets/img/send.png");
+				-webkit-mask: url('../assets/img/send.svg') no-repeat 50% 50%;
+				height: 20px;
+				width: 20px;				
+				background-color: lightgray;
+			}
+		}
+		.user-info-reply{
+			padding-top: 10px;
+			.card-header-md, .card-header-ios {
+				color: #00A0DF;
+				&.card-header {
+					font-size: 11.2px;
+				}
+				&.card-header-username{
+					font-size: 8px;	
+				}
+			}
+		}
+
+		.card-content-md, .card-content-ios {
+			line-height: 1.1;
+			font-size: 13px;
+			color:black;
+			padding: 0;
+
+			word-wrap: break-word;
+			overflow: hidden;
+		    text-overflow: ellipsis;
+		    display: -webkit-box;
+	   
+			-webkit-box-orient: vertical;
+		}
+
+
+		.post-buttom {
+
+			.attachments, .gallery {
+				fill: red;
+				.gallery-icon {
+					background-image: url("../assets/img/Gallery.svg");
+					color:red;
+					height: 22px;
+					width: 22px;
+				}
+				
+				background-color: white;
+			}
+			padding: 5px 0;
+			button{
+				margin-left: 50px;
+				width: 40px;
+				height: 40px;
+				background-color: white;
+				//float: right;
+			}
+			
+		}
+	}
+
+
+	.replies {
+		margin-top: 0px;
+		padding: 0px 0px 5px 0px;
+		background-color: white;
+		line-height: 1;
+		ion-col {
+			padding: 0;
+		}
+		.item-md, .item-ios{
+			padding-left: 0;
+
+			.item-inner {
+				padding: 0 30px 0 30px;
+				border-bottom: 3px solid rgba(169,176,187,0.65);
+
+				ion-label {
+					margin-right: 0;
+				}
+			}
+		}
+
+		.user-infos {
+			font-weight: 600;
+			font-size: 13px;
+		}
+		.user-info {
+			img {
+				position: relative;
+			    top: 0px;
+			    width: 40px;
+			    min-height: 1px;
+			    clip-path: circle(38% at center);
+			}
+		}
+
+		.card-content-md, .card-content-ios {
+			padding: 0 0 10px 0;
+			text-align: justify;
+			&.card-header-text {
+				color:black;
+				font-weight: normal;
+				font-size: 14px !important;
+			}
+		}
+
+		.card-header-md, .card-header-ios {
+			padding: 0;
+			color: #00A0DF;
+			font-weight: bold;
+			padding-left: 5px;
+			&.card-header-fullname {
+				padding-top: 10px; 
+				font-size: 11.2px;
+	    		
+			}
+			&.card-header-username{
+				font-size: 8px;	
+			}
+			&.card-header-created {
+				font-size: 8px;
+				color: lightgray;
+			}
+
+		}
+		.post-text {
+			
+			
+			textarea{
+				width: 100%;
+				height: 45px;
+				font-size: 14px;
+				font-weight: 300;
+				border: 1px inset;
+			}
+		}
+
+		.share-button {
+			padding: 5px 0;
+			button {
+				background-color: white;
+			}
+
+		}
+
+		.post-buttom {
+			padding: 5px 0;
+			button{
+				width: 60px;
+				height: 30px;
+				border: 1px solid blue;
+				border-radius: 3px;
+				background-color: white;
+			
+			}
+			
+		}
+	}
+
+	.user-info {
+		padding: 0;
+		
+
+	}
+
+	.scroll-content {
+		background-color:  lightgray !important;
+		padding: 0 !important;
+		overflow-y: overlay !important;
+	}
+	.scroll-content::-webkit-scrollbar {
+	width: 1px;
+	height: 1px;
+	}
+	.scroll-content::-webkit-scrollbar-track-piece  {
+	background-color: transparent;
+	
+	}
+	.scroll-content::-webkit-scrollbar-thumb:vertical {
+	
+	background-color: transparent;
+
+	}
+
+	.replies {
+		padding: 0 0px 5px 0px;
+
+
+		
+	}
+
+	.card-buttons {
+		border-bottom: 1px solid lightgray;
+		&.no-border {
+			border-bottom: none !important;
+			margin-bottom: -15px;
+		}
+	}
+
+	.votes {
+		display: flex;
+		justify-content: flex-end;
+
+		button {
+			padding: 0;
+		}
+	}
+
+	.grid {
+		padding-right: 0;
+	}
+
+	.ion-col-helps {
+		background-color: white;
+		text-align: center;
+		
+		
+		.ion-md-arrow-round-up:before, .ion-md-arrow-round-down:before {
+			
+			width: 20px;
+			height: 20px;
+			font-size: 25px;
+			z-index: 5;
+			//color: lightgray;
+		}
+		.ion-md-arrow-round-up:before {
+			margin-left: -23px;
+		}
+
+				
+	}
+	.helps_given_text{
+		color:lightgray;
+		text-align: center;
+	}
+
+	.toolbar-ios, .toolbar-md {
+		padding-top: 0;
+		padding-bottom: 8px;
+	}
+
+	.footer-tabs {
+		display: inline-flex;
+		justify-content: space-between;
+		margin:0;
+		padding: 0;
+		
+
+		 ion-label {
+  			display: block;
+  			text-align: center;
+  			margin: 0;
+  		}
+
+		.home, .friends, .communities, .talk, .notifications{
+			font-size: 10px;
+			color: white;
+			margin:0;
+			padding: 0;
+			height: 40px;
+			span{
+				text-align: center;
+			}
+			img{
+			background-image: url("../assets/icon/home_white.png");
+			-webkit-mask: url(../assets/icon/home_white.svg) no-repeat 50% 50%;
+			
+			
+			min-height: 40px !important;
+		 	width: 100% !important;
+		 	background-size: 100% 100%;
+		 	background-color: #97CAEB;
+	 		}
+
+		}
+
+		button {
+			font-size: 10px;
+			background-color: transparent;
+			padding: 0;
+			border-radius: none;
+		}
+	}
+
+}

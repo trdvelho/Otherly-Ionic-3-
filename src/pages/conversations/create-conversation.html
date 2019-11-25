@@ -1,0 +1,135 @@
+
+<ion-header >
+  
+  <ion-toolbar class="otherly-main-header sub-page">
+    <ion-col col-12 class="otherly-top-nav">
+     <ion-col col-2>
+       
+          <button ion-button (click)="GoBack()"><ion-icon name="arrow-back"></ion-icon></button>
+        
+      </ion-col>
+        
+
+
+      <ion-col col-7 class="search-bar">
+        <ion-searchbar [(ngModel)]="myInput">
+
+        </ion-searchbar>
+      </ion-col>
+      <ion-col col-2>
+        <button menuToggle end class="menu-otherly-home"><ion-icon name="menu"></ion-icon></button>
+      </ion-col>
+    </ion-col>
+  </ion-toolbar>
+
+
+</ion-header>
+<ion-content padding>
+  <ion-item class="next"> 
+          
+           <button item-right disabled={{next}} ion-button outline class="create-conv" (click)="nextConversation()">Next</button>
+  </ion-item>
+  <ion-row>
+   
+      <ion-label *ngIf="friends_count == 0" class="new_conv_title">
+        Talk & Intros
+      </ion-label>
+      <ion-label *ngIf="friends_count == 1" class="new_conv_title">
+        1 Friend Added
+      </ion-label>
+      <ion-label *ngIf="friends_count > 1" class="new_conv_title">
+        {{friends_count}} Friends Added
+      </ion-label>
+     
+  <!-- <ion-col col-12> -->
+     
+  <!-- </ion-col> -->
+  <ion-col col-12 padding class="chip-area">
+      <ion-chip *ngFor="let user of conversationChip" (click)="ShowDelete(user.username)" #chip>
+        <ion-avatar *ngIf="!user.chip">
+          <img *ngIf="user.photo_url == null"src="assets/img/avatar_small.svg" />
+          <img *ngIf="user.photo_url !== null"  src='{{user.photo_url}}' />
+        </ion-avatar>
+        <button *ngIf="user.chip" ion-button clear color="dark" (click)="delete(chip,user.username)">
+          <ion-icon name="close-circle"></ion-icon>
+        </button>
+        <ion-label>{{user.full_name}}</ion-label>
+       </ion-chip>
+    </ion-col>  
+</ion-row>
+<ion-row>
+ <ion-item class="new_conv_friend_search">
+      <ion-searchbar class="new_conv_friends_bar"
+      [(ngModel)]="searchFriendConv"
+      (ionInput)="onInput($event)">
+    </ion-searchbar>
+  </ion-item>
+</ion-row> 
+  <ion-list class="ion-list friends-list" >    
+          <!-- LOOP WITH THE FRIENDS LIST -->        
+          <ion-item class="create-conv-friends" *ngFor="let list of List | filterFriendsConv: searchFriendConv " [style.background-color]="list.instance.style">
+              <!-- CONTACT FROM OTHERLY  -->
+               <ion-row *ngIf="list.instance.source =='O'" (click)="selectUser(list.instance.username, list.instance)">            
+                  <ion-col class="user-picture" col-2 >
+                    <img *ngIf="list.instance.photo_url =='' || list.instance.photo_url == undefined || list.instance.photo_url == null " src="assets/img/avatar_small.png" />
+                    <img *ngIf="list.instance.photo_url !== null"  src='{{list.instance.photo_url}}' />
+                  </ion-col>
+                  <ion-col class="user-info" col-7>
+                    <div *ngIf="list.instance.first_name != ''" class="object-item">
+                      <div ><b>{{list.instance.full_name}}</b>
+                      </div>
+                    </div>          
+                    <!-- <div *ngIf="list.instance.first_name == '' && list.instance.full_name != '' " class="object-item">
+                      <div ><b>{{list.instance.full_name}}</b>
+                      </div>
+                    </div> -->
+          
+                    <div *ngIf="list.instance.rating == 0" >
+                      <ion-icon class="star" name='star' ></ion-icon>
+                      <ion-icon class="star" name='star'  ></ion-icon>
+                      <ion-icon class="star" name='star'  ></ion-icon>
+                    </div>
+                    <div *ngIf="list.instance.rating == 1" >
+                      <ion-icon class="star yellow-star" name='star'  ></ion-icon>
+                      <ion-icon class="star" name='star'></ion-icon>
+                      <ion-icon class="star" name='star' ></ion-icon>
+                    </div>
+                    <div *ngIf="list.instance.rating == 2" >
+                      <ion-icon class="star yellow-star" name='star' ></ion-icon>
+                      <ion-icon class="star yellow-star" name='star'></ion-icon>
+                      <ion-icon class="star" name='star'></ion-icon>
+                    </div>
+                    <div *ngIf="list.instance.rating == 3" >
+                      <ion-icon class="star yellow-star" name='star' ></ion-icon>
+                      <ion-icon class="star yellow-star" name='star' ></ion-icon>
+                      <ion-icon class="star yellow-star" name='star'></ion-icon>
+                    </div>
+          
+          
+                  </ion-col>
+          
+                  <ion-col col-3 class="ion-col-helps" [style.background-color]="list.instance.style">
+                    <div class="helps_given" >{{list.instance.helps_given}}</div>
+                    <ion-col col-3><img class="icon-thanks" src="assets/img/thanks.svg" /></ion-col><ion-col col-9 class="helps_given_text">Helps given</ion-col>
+                  </ion-col>
+           </ion-row>
+          
+                 <!-- CONTACT FROM MOBILE  -->
+    <ion-row *ngIf="list.instance.source =='M'">
+        
+    <ion-col col-2 *ngIf="list.instance.photo_url ==''">
+      <img  src="assets/img/avatar_small.png" />
+    </ion-col>
+    <ion-col col-6>
+      <div class="object-item">
+        <div ><b>{{list.instance.full_name}}</b>
+        </div>
+      </div>          
+    </ion-col>         
+    <ion-col col-4 class="ion-col-helps">
+          <button>INVITE</button>
+    </ion-col>
+  </ion-row>
+          </ion-item>
+  </ion-list>
+</ion-content>

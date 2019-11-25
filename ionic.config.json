@@ -1,0 +1,22 @@
+{
+  "name": "otherly",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [
+    {
+      "path": "/apiFront",
+      "proxyUrl": "http://front-end-dev.us-west-2.elasticbeanstalk.com/api"
+    },
+    {
+      "path": "/apiBack",
+      "proxyUrl": "http://ec2-54-213-166-93.us-west-2.compute.amazonaws.com:8025/api"
+    },
+    {
+      "path": "/apiL",
+      "proxyUrl": "https://restcountries.eu"
+    }
+  ]
+}

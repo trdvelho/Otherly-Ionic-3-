@@ -1,0 +1,56 @@
+.Share-Popover .popover-content {
+	min-width: 85% !important;
+	left:5% !important;
+}
+
+share-popover {
+
+	.item-md, .item-ios {
+		font-size: 1.9rem !important;
+	}
+
+	.list-md, .list-ios {
+		margin: -1px 0 0;
+		ion-label{
+			font-size: 18px;
+		}
+	}
+		
+		.avatar-icon {
+			background-image: url("../assets/img/avatar.png");
+			width: 22px;
+			height: 22px;
+			-webkit-mask: url('../assets/img/avatar.svg') no-repeat 50% 50%;
+			background-color: black;
+			
+		}
+
+		.avatar-friends {
+			background-image: url("../assets/img/avatar_friends.png");
+			width: 22px;
+			height: 22px;
+			-webkit-mask: url('../assets/img/avatar_friends.svg') no-repeat 50% 50%;
+			background-color: black;
+		}
+
+		.avatar_communities {
+			background-image: url("../assets/img/avatar_communities.png");
+			width: 22px;
+			height: 22px;
+			-webkit-mask: url('../assets/img/avatar_communities.svg') no-repeat 50% 50%;
+			background-color: black;
+		}
+
+		.facebook {
+			background-image: url("../assets/img/FB.png");
+			width: 22px;
+			height: 22px;
+			-webkit-mask: url('../assets/img/FB.svg') no-repeat 50% 50%;
+			background-color: black;
+		}
+
+		
+	
+		
+
+}

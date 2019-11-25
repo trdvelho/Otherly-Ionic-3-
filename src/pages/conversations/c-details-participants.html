@@ -1,0 +1,193 @@
+<ion-header >
+  
+  <ion-toolbar class="otherly-main-header sub-page">
+    <ion-col col-12 class="otherly-top-nav">
+      <ion-col col-2>
+        <button ion-button (click)="GoBack()"><ion-icon name="arrow-back"></ion-icon></button>
+
+        <ion-col col-7 class="talk-avatar">
+              <img  class="chat-title-avatar" src="assets/img/avatar_small.svg" />
+        </ion-col>
+        
+      </ion-col>
+      
+          <ion-col class="avatar-talk-participants">
+            <ion-col col-8 *ngIf="!details"><ion-spinner name="bubbles"></ion-spinner></ion-col>
+            <ion-col col-9 *ngIf="details">
+              <ion-note class="talk-participants">
+                <div class="conversation-title" (click)="openConversationParticipants(title,details)">{{ title }}
+                </div>
+                <div (click)="openConversationParticipants()" class="participants-list" *ngFor="let items of  details" >{{items.creator.first_name}} {{items.creator.last_name}} <span class="participant-listno" *ngIf="participantsno"> & {{participantsno}} other friends</span>
+                </div>
+              </ion-note>
+            </ion-col>
+        
+          </ion-col>
+      
+      <ion-col col-2>
+        <button menuToggle end class="menu-otherly-home"><ion-icon name="menu"></ion-icon></button>
+      </ion-col>
+    </ion-col>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <!-- <ion-item button (click)="closeModal()">Close </ion-item> -->
+    <ion-grid>
+      <ion-row>
+
+
+          <!-- <div ng-app>
+              <div ng-controller="ClickToEditCtrl">
+                <div ng-hide="editorEnabled">
+                  {{title}}
+                  <a href="#" ng-click="enableEditor()">Edit title</a>
+                </div>
+                <div ng-show="editorEnabled">
+                  <input ng-model="editableTitle" ng-show="editorEnabled">
+                  <a href="#" ng-click="save()">Save</a>
+                  or
+                  <a href="#" ng-click="disableEditor()">cancel</a>.
+                </div>
+              </div>
+            </div> -->
+
+            <ion-col class="edit-title">
+                Talk Name :<span class="edit-talk-name" *ngIf="!isEditable; else editNow">{{ title }}
+                  <!-- <ion-icon name='brush' (click)="allowEditing()"></ion-icon> -->
+
+                  <img src="assets/icon/edit.svg" class="edit-title-icon"  style="margin-left:10px;cursor: pointer;" (click)="allowEditing()" />
+                </span>
+                <ng-template #editNow>
+                    <input class="ion-input edit-title-input"
+                          [value]="editTitle" (input)="editTitle=$event.target.value" 
+                          style="border-radius: 10px; padding-left: 10px; width: 50%;"
+                           name="editTitle" [(ngModel)]="title" (blur)="doneEditingTitle()"/>
+                </ng-template>
+                    
+              </ion-col>
+
+
+        <!-- <ion-col >
+          Talk Name :<span class="edit-talk-name">{{ title }} <ion-icon name='brush' ></ion-icon></span>
+        </ion-col> -->
+      </ion-row>
+        <ion-row>
+          <ion-col col-4 class="chat-setting-avatar">
+              <img  src="assets/img/avatar_small.svg" />
+          </ion-col>
+          <ion-col col-8>
+              <ion-row class="setting-controls">
+                  <!-- <ion-col col-12 (click)="notificationToggle()"> -->
+                      
+                         <!-- <span  class="off-notifications" [ngClass]="{'on-notifications':notifToggle}" >
+                           <ion-icon class="notifications-off" [ngClass]="{'notifications':notifToggle}" name='notifications-off'></ion-icon>  
+                           Notifications On
+                           </span> -->
+                           <span (click)="notificationToggle()" class="chat-setting-icons off-notifications" [ngClass]="{'on-notifications':notifToggle}">
+                              <span *ngIf="notifToggle; else notificationoff"><ion-icon class="notifications"  name='notifications'></ion-icon>Notifications On</span>
+                              <ng-template #notificationoff>
+                                <ion-icon class="notifications-off" name='notifications-off'>
+                                </ion-icon>Notifications Off
+                              </ng-template>
+                              
+                              </span>
+                     
+                     <!-- </ion-col> -->
+                     <!-- <span class="chat-setting-icons">
+                       <ion-icon class="videocam" name="videocam"></ion-icon>
+                       Shared Media
+                     </span> -->
+                       <span class="chat-setting-icons add-new-members" (click)="addParticipant()">
+                          <ion-icon name="add"></ion-icon>
+                         Add New Member
+                     </span>
+                     
+                     <span class="chat-setting-icons" (click)="leaveConversation()">
+                       <ion-icon class="return-right" name='return-right'></ion-icon>
+                       Leave Conversation
+                     </span>
+              </ion-row>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+    <!--  Freind  List  -->
+    <ion-list class="num-of-members">
+      {{usersSelectedLength}} Friends
+    </ion-list>
+    
+    <ion-list class="ion-list" >    
+        <!-- LOOP WITH THE FRIENDS LIST -->        
+        <!-- <ion-item *ngFor="let list of List" > -->
+    <!-- CONTACT FROM OTHERLY  -->
+    <!-- <ion-col>{{list.user.first_name}}
+    </ion-col> -->
+
+
+    
+    <ion-item *ngFor="let list of List" class="participant-list">
+        <!-- CONTACT FROM OTHERLY  -->
+        <ion-row>            
+                    <ion-col class="user-picture" col-2 >
+                      <img class="conv-setting-img" *ngIf="list.user.photo_url =='' || list.user.photo_url == undefined || list.user.photo_url == null " src="assets/img/avatar_small.svg" />
+                      <img class="conv-setting-img" *ngIf="list.user.photo_url !== null"  src='{{list.user.photo_url}}' />
+                    </ion-col>
+                    <ion-col col-7>
+                      <div *ngIf="list.user.first_name != ''" class="object-item">
+                        <div class="friend-list-settings">{{list.user.first_name}} {{list.user.last_name}}
+                        </div>
+                      </div>
+                      <ion-row class="ion-col-helps">
+                          <div class="helps_given">&nbsp;</div>
+                          <div class="helps_given_text">{{list.user.helps_given}} helps given</div>
+                        </ion-row>  
+                    </ion-col>        
+                      <!-- <div *ngIf="list.instance.first_name == '' && list.instance.full_name != '' " class="object-item">
+                        <div ><b>{{list.instance.full_name}}</b>
+                        </div>
+                      </div> -->
+            
+                      <!-- <div *ngIf="list.instance.rating == 0" >
+                        <ion-icon class="star" name='star' ></ion-icon>
+                        <ion-icon class="star" name='star'  ></ion-icon>
+                        <ion-icon class="star" name='star'  ></ion-icon>
+                      </div>
+                      <div *ngIf="list.instance.rating == 1" >
+                        <ion-icon class="star yellow-star" name='star'  ></ion-icon>
+                        <ion-icon class="star" name='star'></ion-icon>
+                        <ion-icon class="star" name='star' ></ion-icon>
+                      </div>
+                      <div *ngIf="list.instance.rating == 2" >
+                        <ion-icon class="star yellow-star" name='star' ></ion-icon>
+                        <ion-icon class="star yellow-star" name='star'></ion-icon>
+                        <ion-icon class="star" name='star'></ion-icon>
+                      </div>
+                      <div *ngIf="list.instance.rating == 3" >
+                        <ion-icon class="star yellow-star" name='star' ></ion-icon>
+                        <ion-icon class="star yellow-star" name='star' ></ion-icon>
+                        <ion-icon class="star yellow-star" name='star'></ion-icon>
+                      </div>
+             -->
+            
+                    <!-- </ion-col> -->
+                    <ion-col col-3 class="ion-col-remove" (click)="removeFromConversation(list.user.username, list.user.first_name, list.user.last_name)" > 
+                      <ion-row class="remove-participant"> 
+                      <!-- <ion-icon name="person"></ion-icon> -->
+                        <img class="remove-friend-icon"/>
+                        <br/>
+                        <span class="remove-user">Remove</span>
+                      </ion-row> 
+            
+                     
+                    </ion-col>
+                  </ion-row>
+            
+                  
+        </ion-item>
+  </ion-list>
+  
+
+</ion-content>

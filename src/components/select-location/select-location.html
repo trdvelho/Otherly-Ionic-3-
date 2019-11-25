@@ -1,0 +1,23 @@
+<ion-list>
+	<ion-title>Chose your location</ion-title>
+  <ion-item>
+    <ion-label>Select your country</ion-label>
+    <ion-select [(ngModel)]="Selected_contry" (ionChange)="CountryWasSelected(Selected_contry)">
+    	<ion-option *ngFor="let item of Country" [value]="item.code" >{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Select your region/state</ion-label>
+    <ion-select [(ngModel)]="Selected_region" (ionChange)="RegionWasSelected(Selected_region)" #region>
+     <ion-option *ngFor="let item of Region" [value]="item.region" >{{item.region}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Select your city</ion-label>
+    <ion-select [(ngModel)]="Selected_city" (ionChange)="RegionWasSelected(Selected_region)" #region>
+     <ion-option *ngFor="let item of City" [value]="item.city" >{{item.city}}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>

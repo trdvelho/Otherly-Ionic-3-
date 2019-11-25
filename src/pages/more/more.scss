@@ -1,0 +1,29 @@
+page-more {
+
+	.user-info, .user-name {
+		margin:0;
+		padding: 0;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		line-height: 0.6;
+		img {
+				width: 50px !important;
+				height: 50px !important;
+				border-radius:50px;
+			}
+
+	}
+
+	.icon{
+		font-size: 1.8rem;
+	}
+
+	.item {
+		padding: 5px 0 5px 10px;
+	}
+	.lightgray{
+		padding: 5px 0 5px 10px;
+		background-color: lightgray;
+	}
+}

@@ -1,0 +1,34 @@
+.relationship_popover {
+	&.work_status {
+			.popover-content {
+				left: 5% !important;
+				width: 90% !important;
+				.item-md, .item-ios {
+					text-align: center !important;
+					font-size: 12px !important;
+					padding-right: 16px;
+					.item-inner {
+						padding: 0;
+						ion-label {
+							margin:0;
+						}
+					}
+				}
+			}
+		}
+	.popover-content {
+		width: 50%;
+		.list-md, .list-ios {
+			margin:0;
+			.item-md, .item-ios {
+				text-align: right;
+				font-size: 11px;
+				padding-right: 16px;
+			}
+		}
+	}
+
+}
+relationship-status {
+
+}

@@ -1,0 +1,73 @@
+tabs{
+	position: fixed;
+
+}
+
+	.ion-md-otherly-home,.ion-ios-otherly-home, .ion-ios-otherly-home-outline,.ion-android-otherly-home,
+	.ion-md-otherly-friends,.ion-ios-otherly-friends-outline,.ion-android-otherly-friends,
+	.ion-md-otherly-talk,.ion-ios-otherly-talk,.ion-ios-otherly-talk-outline,.ion-android-otherly-talk,
+	.ion-md-otherly-notifications,.ion-ios-otherly-notifications,.ion-ios-otherly-notifications-outline,.ion-android-otherly-notifications,
+	.ion-md-otherly-communities,.ion-ios-otherly-communities,.ion-ios-otherly-communities-outline,.ion-android-otherly-communities,
+	{
+	 	min-height: 45px !important;
+	 	width: 30px !important;
+	 	background-size: 100% 100%;
+	 	background-color: #97CAEB;
+	}
+
+	.tabs-md[tabsLayout=icon-top], .tabs-ios[tabsLayout=icon-top] {
+
+		.has-icon .tab-button-text{
+			color: white;
+			font-size:8px;
+			margin-top: -8px;
+		}
+	}
+	.tabs-md, .tabs-ios {
+		.tab-button-icon {
+			margin-top: 0;
+		}
+		.tab-button[aria-selected=true] .tab-button-icon{
+			background-color: white !important;
+			transform: translate3d(0, -4px, 0);
+		}
+	}
+
+	.ion-md-otherly-home,.ion-ios-otherly-home,.ion-android-otherly-home, .ion-ios-otherly-home-outline{
+		//background-image: url("../assets/icon/home_white.png");
+		-webkit-mask: url(../assets/icon/home_white.svg) no-repeat 50% 50%;
+	}
+
+	.ion-md-otherly-friends,.ion-ios-otherly-friends,.ion-android-otherly-friends, .ion-ios-otherly-friends-outline{	
+		//background-image: url("../assets/icon/Friend_white.png");
+		-webkit-mask: url(../assets/icon/Friend_white.svg) no-repeat 50% 50%;		
+	}
+
+	.ion-md-otherly-communities,.ion-ios-otherly-communities,.ion-android-otherly-communities, .ion-ios-otherly-communities-outline{
+		//background-image: url("../assets/icon/communities_white.png");
+		-webkit-mask: url(../assets/icon/communities_white.svg) no-repeat 50% 50%;
+	}
+
+	.ion-md-otherly-talk,.ion-ios-otherly-talk,.ion-android-otherly-talk, .ion-ios-otherly-talk-outline {
+		//background-image: url("../assets/icon/talk_white.png");
+		-webkit-mask: url(../assets/icon/talk_white.svg) no-repeat 50% 50%;	
+	}
+
+	.ion-md-otherly-notifications,.ion-ios-otherly-notifications,.ion-android-otherly-notifications, .ion-ios-otherly-notifications-outline {
+		//background-image: url("../assets/icon/notification_white.png");
+		-webkit-mask: url(../assets/icon/notification_white.svg) no-repeat 50% 50%;
+	}
+	
+
+	
+
+	.tabs-md .tabbar, .tabbar.show-tabbar {
+		background-color: #00A0DF;
+	}
+	.tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
+		    transform: translate3d(0, -4px, 0);
+	}
+
+	.tabs-ios .tab-button-icon {
+		transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+	}

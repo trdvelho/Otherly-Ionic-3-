@@ -1,0 +1,184 @@
+
+
+<ion-content>
+  
+    <ion-searchbar [(ngModel)]="search_friends" (keyup.enter)="Search()" placeholder="Search friend..." >
+    </ion-searchbar>
+
+
+  <ion-row>
+  <ion-col col-5>
+    <div padding>
+      <b>My Friends</b>
+    </div>
+  </ion-col>
+
+  <ion-col col-6>
+    <div padding *ngIf="!add_friends">
+      <button (click)="Show_Add_friends()">
+      Add friend
+      </button>
+    </div>
+  </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="add_friends">
+
+    <!-- ADD GOOGLE FRIENDS -->
+    <ion-col col-12 class="add_friend">
+      <ion-col col-2>
+        <img  src="assets/img/Google_Logo.png" />
+      </ion-col>
+
+      <ion-col col-9 >
+        Sync friends with Google 
+      </ion-col>
+    </ion-col>
+
+
+    <!-- ADD FACEBOOK FRIENDS -->
+    <ion-col col-12 class="add_friend">
+      <ion-col col-2>
+        <img  src="assets/img/facebook-logo.png" />
+      </ion-col>
+
+      <ion-col col-9>
+        Add Friends from Facebook 
+      </ion-col>
+    </ion-col>
+
+    <!-- ADD FRIENDS USING EMAIL -->
+    <ion-col col-12 class="add_friend">
+      <ion-col col-2>
+        <img  src="assets/img/avatar_small.png" />
+      </ion-col>
+
+      <ion-col col-9>
+        Add with e-mail
+      </ion-col>
+    </ion-col>
+
+    <!-- ADD FRIENDS FROM MOBILE CONTACTS -->
+    <ion-col col-12 class="add_friend" (click)="add_contact_mobile()">
+      <ion-col col-2>
+        <img  src="assets/img/avatar_small.png" />
+      </ion-col>
+
+      <ion-col col-9>
+        Add from my mobile contacts
+      </ion-col>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-spinner *ngIf="!List || search == -1"></ion-spinner>
+
+  <ion-row *ngIf="quantity == 0" padding>
+    You don't have any friends yet
+  </ion-row>
+
+  <ion-row *ngIf="search == 0" padding>
+    We didn't find any result matching your query...
+  </ion-row>
+
+  <ion-list class="ion-list"  *ngIf="quantity != 0 && !add_friends">
+
+    <!-- LOOP WITH THE FRIENDS LIST -->
+    
+    <ion-item *ngFor="let list of List | filterFriends: search_friends " >
+
+    
+
+      <!-- CONTACT FROM OTHERLY  -->
+      <ion-row *ngIf="list.instance.source =='O'">
+
+        
+          
+        <ion-col class="user-picture" col-3 (click)="ShowProfile(list.instance)">
+          <img *ngIf="list.instance.photo_url =='' || list.instance.photo_url == undefined" src="assets/img/avatar_small.png" />
+          <img *ngIf="list.instance.photo_url !== undefined"  src='{{list.instance.photo_url}}' />
+        </ion-col>
+        
+        <ion-col col-5>
+          <div *ngIf="list.instance.first_name != ''" class="object-item">
+            <div ><b>{{list.instance.full_name }}</b>
+            </div>
+          </div>
+
+          <!-- <div *ngIf="list.instance.first_name == '' && list.instance.full_name != '' " class="object-item">
+            <div ><b>{{list.instance.full_name}}</b>
+            </div>
+          </div> -->
+
+          <div *ngIf="list.instance.rating == 0" >
+            <ion-icon class="star" name='star' (click)="changeRating(list.instance.username,1)"></ion-icon>
+            <ion-icon class="star" name='star' (click)="changeRating(list.instance.username,2)" ></ion-icon>
+            <ion-icon class="star" name='star' (click)="changeRating(list.instance.username,3)" ></ion-icon>
+          </div>
+          <div *ngIf="list.instance.rating == 1" >
+            <ion-icon class="star yellow-star" name='star' (click)="changeRating(list.instance.username,1)" ></ion-icon>
+            <ion-icon class="star" name='star' (click)="changeRating(list.instance.username,2)"></ion-icon>
+            <ion-icon class="star" name='star' (click)="changeRating(list.instance.username,3)"></ion-icon>
+          </div>
+          <div *ngIf="list.instance.rating == 2" >
+            <ion-icon class="star yellow-star" name='star' (click)="changeRating(list.instance.username,1)"></ion-icon>
+            <ion-icon class="star yellow-star" name='star' (click)="changeRating(list.instance.username,2)"></ion-icon>
+            <ion-icon class="star" name='star' (click)="changeRating(list.instance.username,3)"></ion-icon>
+          </div>
+          <div *ngIf="list.instance.rating == 3" >
+            <ion-icon class="star yellow-star" name='star' (click)="changeRating(list.instance.username,1)"></ion-icon>
+            <ion-icon class="star yellow-star" name='star' (click)="changeRating(list.instance.username,2)"></ion-icon>
+            <ion-icon class="star yellow-star" name='star' (click)="changeRating(list.instance.username,3)"></ion-icon>
+          </div>
+
+          <div *ngIf="list.instance.rating == -1 " >
+            <ion-spinner></ion-spinner>
+            
+          </div>
+        
+
+
+        </ion-col>
+
+        <ion-col col-4 class="ion-col-helps">
+          <div class="helps_given">{{list.instance.helps_given}}</div>
+          <div class="helps_given_text">helps given</div>
+        </ion-col>
+      </ion-row>
+
+
+      
+      <!-- CONTACT FROM MOBILE  -->
+      <ion-row *ngIf="list.instance.source =='M'">
+
+        <ion-col col-2 *ngIf="list.instance.photo_url ==''">
+          <img  src="assets/img/avatar_small.png" />
+        </ion-col>
+        <ion-col col-6>
+          <div class="object-item">
+            <div ><b>{{list.instance.full_name}}</b>
+            </div>
+          </div>
+
+
+        </ion-col>
+
+        <ion-col col-4 class="ion-col-helps">
+              <button>INVITE</button>
+        </ion-col>
+      </ion-row>
+
+        
+    </ion-item>
+
+    
+    <!-- END OF LOOP -->
+  </ion-list>
+
+ <!--  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+
+
+</ion-content>

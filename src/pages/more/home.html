@@ -1,0 +1,88 @@
+<ion-header>
+
+  <ion-navbar >
+    <ion-icon name="back" class="icon-back"></ion-icon>
+
+    
+    
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row class="infos" padding>
+      <ion-col col-12 class="about">
+        About me
+      </ion-col>
+      <ion-col col-12 class="user-info" *ngIf="UserData.picture != null">
+        <img class="infos-img" src="{{ UserData.photo_url }}" />
+      </ion-col>
+      <ion-col col-12 class="user-info" *ngIf="UserData.picture == null">
+          <img class="infos-img" src="assets/img/avatar_small.png" />
+      </ion-col>
+
+      <ion-col col-12 class="user-name" *ngIf="UserData">
+        {{ UserData.full_name }}
+      </ion-col>
+
+      <ion-col col-12 class="user-info">
+        <ion-col col-4 class="user-info">
+          <ion-grid>
+          <p class="quantity number">{{ UserData.helps_given }}</p><br/>
+          <p class="quantity title">Helps given</p>
+          </ion-grid>
+        </ion-col>
+      <div class="separator"></div>
+      <ion-col col-4 class="user-info">
+        <ion-grid>
+        <p class="quantity title">Vancouver, Canada</p>
+
+        </ion-grid>
+      </ion-col>
+      <div class="separator"></div>
+      <ion-col col-4 class="user-info">
+        <ion-grid class="quantity number"><p>{{ UserData.thanks_sent }}</p><br/>
+        <p class="quantity title">Thanks sent</p>
+        </ion-grid>
+      </ion-col>
+      </ion-col>
+
+
+
+      <ion-row class="buttons_options">
+        <ion-col col-3 >
+          <img src="assets/img/post.png" />
+        </ion-col>
+
+
+
+        <ion-col col-3 >
+          
+          <img  src="assets/img/activities.png" />
+        </ion-col>
+
+        <ion-col col-3 >
+          
+          <img src="assets/img/inspire_blue.png" />
+        </ion-col>
+
+        <ion-col col-3 >
+          
+          <img src="assets/img/more_blue.png" />
+        </ion-col>
+    
+    </ion-row>
+
+      
+  </ion-row>
+  
+  
+
+
+
+
+
+
+  
+</ion-content>

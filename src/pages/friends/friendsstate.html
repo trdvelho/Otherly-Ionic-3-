@@ -1,0 +1,299 @@
+<ion-header>
+  <ion-toolbar class="otherly-main-header sub-page">
+    <ion-col col-12 class="otherly-top-nav">
+      <ion-col col-2>
+        <button ion-button (click)="GoBack()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-col>
+
+      <ion-col col-8 class="search-bar">
+        <ion-searchbar [(ngModel)]="myInput"></ion-searchbar>
+      </ion-col>
+      <ion-col col-2>
+        <button menuToggle end class="menu-otherly-home">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-col>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-buttons class="fab-edit" top right (click)="EditProfile()">
+    <button ion-fab mini ><img /></button>
+  </ion-buttons>
+  <img *ngIf="fab_button_visibility == ''" class="camera_edit_background"/>
+  <p class="camera_text_background" *ngIf="fab_button_visibility == '' ">ADD</p>
+
+  <input type="file" accept="image/*" #fileInput style="display:none; height: 0px" name="files[]" (change)="processWebImage($event)"
+  />
+
+  <ion-row class="infos">
+    <ion-col col-12 class="user-info" *ngIf="UserData.photo_url != null">
+      <div>
+        <img *ngIf="fab_button_visibility == ''" (click)="openMediaWith($event)" class="camera_edit"/>
+        <p class="camera_text" *ngIf="fab_button_visibility == '' " (click)="openMediaWith($event)">ADD</p>
+        <img class="user_photo" src="{{ UserData.photo_url }}" />
+      </div>
+    </ion-col>
+    <ion-col col-12 class="user-info" *ngIf="UserData.photo_url == null" >
+      <div>
+        <img *ngIf="fab_button_visibility == ''" (click)="openMediaWith($event)" class="camera_edit"/>
+        <p class="camera_text" *ngIf="fab_button_visibility == '' " (click)="openMediaWith($event)">ADD</p>
+        <img class="user_photo" src="assets/img/avatar_small.svg" />
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="infos user">
+
+    <ion-col col-12 class="full-name" *ngIf="UserData">
+      {{ UserData.first_name }} {{ UserData.last_name }}
+    </ion-col>
+    <ion-col col-12 class="user-name" *ngIf="UserData">
+      @{{ UserData.username }}
+    </ion-col>
+
+    <ion-col col-12 class="user-info">
+      <ion-col col-3 class="user-info">
+        <ion-grid>
+          <p class="quantity number">{{ UserData.contact_count }}</p>
+          <p class="quantity title"> <img class="friends_icon" /> <span>Friends</span></p>
+        </ion-grid>
+      </ion-col>
+
+      <ion-col col-6 class="user-info">
+        <ion-grid>
+          <p class="location"><img class="location_icon" />
+            <span *ngIf="location_size > 0"> {{UserData.location.city}}</span>
+            <span class="add_location" *ngIf="location_size == 0" (click)="SelectLocation()"> + Add City, Contry</span>
+          </p>
+        </ion-grid>
+      </ion-col>
+
+      <ion-col col-3 class="user-info">
+        <ion-grid>
+          <p class="quantity number" *ngIf="About_me">{{ About_me.user.helps_given }}</p>
+          <p class="quantity number" *ngIf="!About_me"><ion-spinner name="bubbles"></ion-spinner></p>
+          <p class="quantity title"> <img class="heart_icon" /> <span> Helps given</span></p>
+        </ion-grid>
+      </ion-col>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row class="buttons">
+    <ion-col col-3 (click)="scrollTo('asks_and_offers')">
+      <img class="create_post" />
+    </ion-col>
+
+    <ion-col col-3>
+      <img class="thanks" />
+    </ion-col>
+
+    <ion-col col-3>
+      <img class="otherly_coins" />
+    </ion-col>
+
+    <ion-col col-3 (click)="NavigateInProfile($event)">
+      <img class="more" />
+    </ion-col>
+  </ion-row>
+
+
+
+  <ion-list class="ion-cards">
+
+
+    <!-- A BIT ABOUT ME -->
+    <ion-card #a_bit_about_me class="a_bit_about_me">
+        <ion-buttons  right class="a_bit_about_me_save_button" [style.visibility]="fab_button_visibility">
+         <button (click)="EditABitAboutMe()">SAVE</button>
+      </ion-buttons>
+
+      <ion-label>
+        A BIT ABOUT ME
+      </ion-label>
+
+      <ion-row *ngIf="About_me">
+        <ion-label class="something_about_your_self real_text" >
+          <ion-textarea maxlength="110" (keydown)="TextAreaKeyDown()" disabled={{textarea_disabled}} [(ngModel)]="About_me_header_text" placeholder="Write something about your self!" text-wrap #about_me_textarea></ion-textarea>
+        </ion-label>
+      </ion-row>
+      <ion-label class="something_about_your_self quantity" *ngIf="About_me">
+        {{header_lenght}}/110
+      </ion-label>
+
+      <ion-row>
+        <ion-label class="five_years">
+          Where i see myself in 5 years!
+        </ion-label>
+      </ion-row>
+      <ion-row *ngIf="About_me">
+        
+        <ion-label  class="five_years text real_text" >
+            <ion-textarea disabled={{textarea_disabled}} [(ngModel)]="About_me_five_years" placeholder="Share your projections, dreams and goals!" text-wrap></ion-textarea>
+        </ion-label>
+      </ion-row>
+
+
+
+
+      <ion-row class="birthday_relationship-area">
+        <ion-col auto>
+          <img class="birthday" />
+        </ion-col>
+        <ion-col col-4 class="birthday-relationship-add birthday-align" *ngIf="About_me">
+              <div (click)="date.open()" [style.display]="AddBirthday_text_hide">+ ADD</div>
+              <div [style.display]="AddBirthday_text_hide" (click)="date.open()">BIRTH DATE</div>
+
+              <ion-datetime #date [style.display]="DateTime_hide" displayFormat="MMM DD, YYYY" [(ngModel)]="myDate" (ionChange)="DateSelected()"></ion-datetime>
+        </ion-col>
+
+        <ion-col col-6 class="birthday-relationship-add relationship-align" *ngIf="About_me">
+              <div *ngIf="About_me.relationship_status == 'Unknown'" (click)="Add_relationship($event)">+ ADD</div>
+              <div *ngIf="About_me.relationship_status == 'Unknown'" (click)="Add_relationship($event)">Relationship status</div>
+              <div *ngIf="About_me.relationship_status !== 'Unknown'" (click)="Add_relationship($event)">{{About_me.relationship_status}}</div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="social">
+
+        <img class="www" />
+        <div class="birthday-relationship-add"> ADD WEBSITE</div>
+
+        <img class="add_social" />
+        <div class="birthday-relationship-add">+ SOCIAL LINKS</div>
+
+      </ion-row>
+    </ion-card>
+    <!-- END OF - A BIT ABOUT ME -->
+
+
+
+    <!-- MY ASKS & OFFERS -->
+    <ion-card #asks_and_offers>
+      <ion-label>
+        MY ASKS & OFFERS
+      </ion-label>
+
+      <ion-row class="asks_and_offers post" >  
+        <ion-col class="user-info" (click)="UserProfile()">
+          <img *ngIf="UserData.photo_url !== null " src="{{ UserData.photo_url }}" />
+          <img *ngIf="UserData.photo_url == null" src="assets/img/avatar_small.svg" />
+        </ion-col>
+        <ion-col col-8 class="infos_and_text" (click)="UserProfile()">
+          <ion-col col-12 class="user-infos">{{UserData.first_name}} {{UserData.last_name}}</ion-col>
+          <ion-row col-12 class="user-infos" >@{{UserData.username}}</ion-row>
+
+          <ion-col col-12 class="post-text">
+              <ion-textarea class="post-text-input" id="chatbox" #chatbox [(ngModel)]="post_text" (keyup)="onChange($event.keyCode)" (keydown)="resize()" placeholder="Ask for or offer something..." ></ion-textarea>  
+          </ion-col>
+        </ion-col>
+        <ion-col col-12 class="post-buttom">
+          <button (click)="createPost()" float-right><img [style.background-color]="send_color" class="send" /></button>
+        </ion-col>
+      </ion-row>
+
+
+    </ion-card>
+    <!--  END OF - MY ASKS & OFFERS  -->
+
+    <!-- WHAT I DO -->
+    <ion-card #what_i_do class="what_i_do" *ngIf="About_me">
+        <ion-buttons  right class="what_i_do_save_button" [style.visibility]="fab_button_visibility">
+         <button (click)="EditABitAboutMe()">SAVE</button>
+        </ion-buttons>
+      <ion-label>
+        WHAT I DO
+      </ion-label>
+
+      <ion-row class="professional_background my_bg" *ngFor="let job of About_me.what_i_do" >
+        <ion-col *ngIf="fab_button_visibility !== 'hidden' ">
+          <button (click)="DeleteProfessionalBg(job.id)"><img class="delete_button professional"/> </button>
+        </ion-col>
+        <ion-col col-11>
+          <div class="title" text-wrap>
+            {{job.name}}
+          </div>
+          <div text-wrap>
+            {{job.where}}
+          </div>
+          <div text-wrap *ngIf="job.description">
+            {{job.description}}
+          </div>
+          <ion-col col-12 class="what_i_do period" text-wrap *ngIf="job.end_year == null,else job_end_date">
+            {{job.start_year}} - Current
+          </ion-col>
+          <ng-template #job_end_date >
+            <ion-col col-12 class="what_i_do period" text-wrap>
+              {{job.start_year}} - {{job.end_year}}
+            </ion-col>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+      <ion-row class="professional_background add_bg">
+        <ion-col>
+          <button (click)="AddProfessionalBG()"><img class="add_social professional"/> </button>
+        </ion-col>
+        <ion-col  col-11 *ngIf="About_me">
+          <div class="title" text-wrap>
+            Professional Title, Study Major, etc.
+          </div>
+          <div text-wrap>
+            Company name or school
+          </div>
+          <ion-col col-12 class="what_i_do" text-wrap>
+            Start data - End data or Current
+          </ion-col>
+        </ion-col>
+      </ion-row>
+      <ion-row class="professional_background work_status">
+        <ion-col *ngIf="About_me.employment_status == 'Unknown',else work_status" (click)="WorkStatus()">
+          <div class="title" text-wrap>
+            What is your work status? Busy, looking for work?
+          </div>
+        </ion-col>
+        <ng-template #work_status >
+          <ion-col class="title" text-wrap (click)="WorkStatus()">
+            {{About_me.employment_status}}
+          </ion-col>
+        </ng-template>
+      </ion-row>
+    </ion-card>
+
+
+    <!-- WHAT I AM GOOD AT -->
+    <ion-card #what_i_do class="what_i_am_good_at" *ngIf="About_me">
+      
+        
+        <!-- <ion-buttons  right class="what_i_do_save_button" >
+           <button (click)="()">  </button>
+        </ion-buttons> -->
+      <ion-row>
+        <ion-label>
+          WHAT I'M GOOD AT
+        </ion-label>
+      </ion-row>
+      <ion-buttons class="section_edit" >
+          <button ><img /></button>
+        </ion-buttons>
+
+      <ion-row *ngFor="let range of About_me.what_i_am_good_at">
+        <ion-item >
+            <ion-range [(ngModel)]=range.rating min="0" max="10" pin=true disabled=false  [style.padding-top]="0" >
+          </ion-range>
+        </ion-item>
+        <div class="content">{{range.content}}</div>
+      </ion-row>
+    </ion-card>
+    <!-- END OF - A BIT ABOUT ME -->
+
+
+
+  </ion-list>
+
+</ion-content>

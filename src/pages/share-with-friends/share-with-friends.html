@@ -1,0 +1,188 @@
+<ion-header >
+  <ion-toolbar class="otherly-main-header sub-page">
+    <ion-col col-12 class="otherly-top-nav">
+     <ion-col col-2> 
+          <button ion-button (click)="GoBack()"><ion-icon name="arrow-back"></ion-icon></button>  
+      </ion-col>
+      <ion-col col-8 class="search-bar">
+        <ion-searchbar [(ngModel)]="myInput"></ion-searchbar>
+      </ion-col>
+      <ion-col col-2>
+        <button menuToggle end class="menu-otherly-home"><ion-icon name="menu"></ion-icon></button>
+      </ion-col>
+    </ion-col>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content has-tabs="true">
+  <ion-row  class="fixed-area">
+      <ion-row class="post-area">
+        <ion-col class="user-picture" col-3 >
+          <img  class="avatar" *ngIf="Post.creator.photo_url == null" src="assets/img/avatar_small.svg" />
+          <img *ngIf="Post.creator.photo_url !== null" src="Post.creator.photo_url" />
+        </ion-col>
+
+        <ion-col col-7>
+           <ion-card-header class="card-header" text-wrap>
+            {{Post.creator.full_name}}
+            </ion-card-header>
+            <ion-card-header class="card-header-username" text-wrap>
+            {{Post.creator.username}}
+            </ion-card-header>
+            <ion-card-header class="card-header-date" text-wrap>
+            {{Post.created}}
+            </ion-card-header>
+        </ion-col>
+        
+        <ion-col col-12>
+          <ion-card-header class="card-header-black" text-wrap>
+            {{Post.subject}}
+          </ion-card-header>
+
+          <ion-card-content [style.-webkit-line-clamp]='Post.ellipsis' text-wrap>
+            {{Post.text}}
+          </ion-card-content>
+
+          <button class="read_more_btn" *ngIf="Post.text.length > 120" (click)="ReadMore()">{{Post.read_more_text}}</button>
+        </ion-col>
+
+       
+      </ion-row>
+  
+      <ion-item class="next">
+        <button disabled={{next}} item-right (click)="nextConversation()">NEXT</button>
+      </ion-item>
+  
+      <ion-label *ngIf="share_count == 0 && action == 'friends'" class="share_title">
+        Share with Friends
+      </ion-label>
+      <ion-label *ngIf="share_count == 1 && action == 'friends'" class="share_title">
+        1 Friend Added
+      </ion-label>
+      <ion-label *ngIf="share_count > 1 && action == 'friends'" class="share_title">
+        {{share_count}} Friends Added
+      </ion-label>
+
+      <ion-label *ngIf="share_count == 0 && action == 'communities'" class="share_title">
+        Share with Community
+      </ion-label>
+      <ion-label *ngIf="share_count == 1 && action == 'communities'" class="share_title">
+        1 Community Added
+      </ion-label>
+      <ion-label *ngIf="share_count > 1 && action == 'communities'" class="share_title">
+        {{share_count}} Communities Added
+      </ion-label>
+    
+
+
+      <ion-col col-12 padding class="chip-area">
+        <ion-chip *ngFor="let user of usernames" (click)="ShowDelete(user.username)" #chip>
+          <ion-avatar *ngIf="!user.chip">
+            <img *ngIf="user.photo_url == null" src="assets/img/avatar_small.svg" />
+                <img *ngIf="user.photo_url !== null"  src='{{user.photo_url}}' />
+          </ion-avatar>
+          <button *ngIf="user.chip" ion-button clear color="dark" (click)="delete(chip,user.username)">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+          <ion-label>{{user.full_name}}</ion-label>
+      
+         </ion-chip>
+      </ion-col>
+
+      <ion-col col-12 padding class="chip-area">
+        <ion-chip *ngFor="let community of SelectedCommunities" (click)="ShowDelete(community.slug)" #chip>
+          <ion-avatar *ngIf="!community.chip">
+            <img src="assets/img/avatar_small.svg" />
+          </ion-avatar>
+          <button *ngIf="community.chip" ion-button clear color="dark" (click)="delete(chip,community.slug)">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+          <ion-label>{{community.title}}</ion-label>
+      
+         </ion-chip>
+      </ion-col>
+
+      <ion-col col-12 class="input-tag">
+            <ion-tags-input [(ngModel)]="usersSelected" (onChange)="onChange($event)" [placeholder]="Placeholder" [canEnterAdd]="false" [canBackspaceRemove]="false"></ion-tags-input>
+      </ion-col>
+      <ion-col col-12>        
+          <ion-searchbar [(ngModel)]="search_friends" placeholder="{{Placeholder}}"></ion-searchbar>
+      </ion-col>
+  </ion-row>
+
+
+    
+
+  <ion-list class="ion-list friends-list">
+            <!-- LOOP WITH THE FRIENDS LIST -->        
+    <ion-item *ngFor="let list of List | filterFriends: search_friends" [style.background-color]="list.instance.style" (click)="selectUser(list.instance)">
+      
+      <ion-row >
+        <ion-col class="user-picture" col-2 >
+          <img *ngIf="list.instance.photo_url == null" src="assets/img/avatar_small.svg" />
+          <img *ngIf="list.instance.photo_url !== null"  src='{{list.instance.photo_url}}' />
+        </ion-col>
+        
+        <ion-col class="user-info" col-7>
+          <ion-card-header class="card-header">
+              {{list.instance.full_name}}
+          </ion-card-header>
+          <ion-card-header class="card-header-username" text-wrap>
+              @{{list.instance.username}}
+          </ion-card-header>
+
+     
+          <div *ngIf="list.instance.rating == 0" >
+            <ion-icon class="star" name='star' ></ion-icon>
+            <ion-icon class="star" name='star'  ></ion-icon>
+            <ion-icon class="star" name='star'  ></ion-icon>
+          </div>
+          <div *ngIf="list.instance.rating == 1" >
+            <ion-icon class="star yellow-star" name='star'></ion-icon>
+            <ion-icon class="star" name='star' ></ion-icon>
+            <ion-icon class="star" name='star' ></ion-icon>
+          </div>
+          <div *ngIf="list.instance.rating == 2" >
+            <ion-icon class="star yellow-star" name='star' ></ion-icon>
+            <ion-icon class="star yellow-star" name='star' ></ion-icon>
+            <ion-icon class="star" name='star' ></ion-icon>
+          </div>
+          <div *ngIf="list.instance.rating == 3" >
+            <ion-icon class="star yellow-star" name='star' ></ion-icon>
+            <ion-icon class="star yellow-star" name='star' ></ion-icon>
+            <ion-icon class="star yellow-star" name='star' ></ion-icon>
+          </div>
+        </ion-col>
+
+        <ion-col col-3 class="ion-col-helps" [style.background-color]="list.instance.style">
+          <div class="helps_given">{{list.instance.helps_given}}</div>
+          <ion-col col-3><img class="icon-thanks" src="assets/img/thanks.svg" /></ion-col><ion-col col-9 class="helps_given_text">Helps given</ion-col>
+        </ion-col>
+      </ion-row>   
+    </ion-item>
+
+
+    <ion-item  *ngFor="let community of Communities | filterCommunity: search_friends" [style.background-color]="community.style" (click)="selectCommunity(community)">
+        
+      <ion-row >
+        <ion-col class="user-picture" col-2 >
+          <img  src="assets/img/avatar_small.svg" />
+        </ion-col>
+        
+        <ion-col class="user-info" col-7>
+          <div class="object-item">
+            <div ><b>{{community.title}}</b></div>
+            <div ><b>{{community.slug}}</b></div>
+          </div>
+        </ion-col>
+
+        <ion-col col-3 class="ion-col-helps" [style.background-color]="community.style">
+          <div class="helps_given">{{community.total_helps}}</div>
+          <ion-col col-3><img class="icon-thanks" src="assets/img/thanks.svg" /></ion-col><ion-col col-9 class="helps_given_text">Helps given</ion-col>
+        </ion-col>
+      </ion-row>
+
+    </ion-item>
+
+  </ion-list>
+</ion-content>
