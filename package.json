@@ -62,7 +62,7 @@
     "ionic-plugin-keyboard": "^2.2.1",
     "ionic-tags-input": "0.0.6",
     "ionicons": "3.0.0",
-    "moment": "^2.20.0",
+    "moment": "^2.29.2",
     "ngx-image-cropper": "^0.2.3",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
